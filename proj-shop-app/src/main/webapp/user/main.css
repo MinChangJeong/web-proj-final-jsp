@@ -1,0 +1,14 @@
+@charset "EUC-KR";
+
+.page-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 50px
+}
+.page-footer {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	bottom: 0;
+}

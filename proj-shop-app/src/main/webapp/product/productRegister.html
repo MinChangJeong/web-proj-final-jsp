@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR" >
+<title>Insert title here</title>
+<link href="productRegister.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="product-container">
+	<div class="page-header">
+	  <img src="../images/logo.png" alt="" />
+	  <div class="menu">
+	  </div>
+	</div>
+	
+	<div class="page-body">
+		<div class="page-sub">
+			<h1>관리자 상품 등록</h1>
+			<h3>상품등록</h3>
+			<span>새로운 상품을 등록해보세요</span>
+		</div>
+		<!-- <form action="productRegisterResult.jsp" method="post" enctype="multipart/form-data">
+			<label for="productName">ProductName : </label> 
+			<input type="text" name="productName" placeholder="insert produt name"/>
+		
+			<label for="productExplain">ProductExplain : </label> 
+			<input type="text" name="productExplain" placeholder="insert produt explain"/>
+			
+			<label for="productName">ProductColor : </label> 
+			<input type="text" name="productColor" placeholder="insert produt color"/>
+			
+			<label class="productImage" for="ProductImage">ProductImage :</label> 
+			<input type="file" name="productImage">
+			
+			<input name="btn" type="submit" value="등록하기"/>
+		</form> -->
+		
+		<form action="productRegisterResult.jsp" method="post"  enctype="multipart/form-data">
+            <table border="0">
+                <tr>
+                    <td>ProductName: </td>
+                    <td><input type="text" name="productName" size="50"/></td>
+                </tr>
+                <tr>
+                    <td>ProductExplain: </td>
+                    <td><input type="text" name="productExplain" size="50"/></td>
+                </tr>
+                <tr>
+                    <td>ProductColor</td>
+                    <td><input type="text" name="productColor" size="50"/></td>
+                </tr>
+                <tr>
+                    <td>Product Photo: </td>
+                    <td><input type="file" name="photo" size="50"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Save">
+                    </td>
+                </tr>
+            </table>
+        </form>
+	</div>
+	  
+	<div class="page-footer">
+		<img src="../images/ban1.jpg" alt="" />
+	  	<img src="../images/ban2.jpg" alt="" />
+	</div>
+</div>
+</body>
+</html>
