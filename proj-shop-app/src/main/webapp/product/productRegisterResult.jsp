@@ -1,5 +1,5 @@
 <%@page import="org.apache.tomcat.util.http.fileupload.IOUtils"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=euc-kr"
     pageEncoding="EUC-KR"%>
 <%@ page import="java.nio.file.*, java.io.*, java.util.*, java.sql.*, util.*, com.oreilly.servlet.*, com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@page import="dao.*, model.*"%> 
@@ -32,6 +32,8 @@
 	String productColor = multi.getParameter("productColor"); 
 	String photo = multi.getFilesystemName("photo");
 	
+	System.out.println(productExplain);
+	
 	ProductDAO productDAO = new ProductDAO();
 	
 	Product product = new Product();
@@ -45,9 +47,35 @@
 	byte[] image = Files.readAllBytes(Paths.get(path));
 	product.setProductImage(image);
 	
-	productDAO.insertProduct(conn, product);
+	int pId = productDAO.insertProduct(conn, product);
 %>
-
+<!-- productDetail Insert -->
+<%
+	String []prices = multi.getParameterValues("price");
+	String []sizes = multi.getParameterValues("productSizes");
+	String []stocks = multi.getParameterValues("stock");
+	
+	System.out.println(prices.length);
+	
+	ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+	
+	System.out.println(pId);
+	
+	for(int i=0; i<prices.length; i++) {
+		ProductDetail productDetail = new ProductDetail();
+		
+		int price = Integer.parseInt(prices[i]);
+		int size = Integer.parseInt(sizes[i]);
+		int stock = Integer.parseInt(stocks[i]);
+		
+		productDetail.setSize(size);
+		productDetail.setPrice(price);
+		productDetail.setStock(stock);
+		
+		productDetailDAO.insertProductDetail(conn, productDetail, pId);
+	}
+	
+%>
 <div>
 안녕하세요 
 

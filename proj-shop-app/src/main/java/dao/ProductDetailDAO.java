@@ -27,9 +27,6 @@ public class ProductDetailDAO {
 			
 		} catch (SQLException e){
 			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn);
-			JdbcUtil.close(pstmt);
 		}
 	}
 }

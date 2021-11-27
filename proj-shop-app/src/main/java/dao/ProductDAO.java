@@ -6,9 +6,10 @@ import model.*;
 import util.*;
 
 public class ProductDAO {
-	public Product insertProduct(Connection conn, Product product) 
+	public int insertProduct(Connection conn, Product product) 
 			throws SQLException {
 		PreparedStatement pstmt=null; 
+		int pId = -1;
 		try {
 			pstmt = conn.prepareStatement
 			("INSERT INTO product (productName, productExplain, productColor, productImage) VALUES (?, ?, ?, ?);");
@@ -20,13 +21,12 @@ public class ProductDAO {
 			
 			pstmt.executeUpdate();
 			
+			pId = selectByName(conn, product.getProductName());
+			
 		} catch (SQLException e){
 			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn);
-			JdbcUtil.close(pstmt);
 		}
-		return product;
+		return pId ;
 	}
 	
 	public Product selectById(Connection conn, int pId) 
@@ -55,5 +55,27 @@ public class ProductDAO {
 			JdbcUtil.close(rs);
 		}
 		return product;
+	}
+	
+	public int selectByName(Connection conn, String productName) 
+			throws SQLException {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		Product product = null; 
+		try {
+			pstmt = conn.prepareStatement
+			("select product_id from product where productName = ?");
+			pstmt.setString(1, productName);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()){
+				product = new Product();
+				product.setId(rs.getInt(1));
+			}
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return product.getId();
 	}
 }
