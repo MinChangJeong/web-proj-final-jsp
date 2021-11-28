@@ -1,10 +1,14 @@
 package dao;
 
-import java.sql.*;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import model.*;
-import util.*;
+import model.ProductDetail;
+import util.JdbcUtil;
 
 public class ProductDetailDAO {
 	public void insertProductDetail(Connection conn, ProductDetail productDetail, int pid) 
@@ -28,5 +32,35 @@ public class ProductDetailDAO {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public List<ProductDetail> selectById(Connection conn, int pId) 
+			throws SQLException {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		ProductDetail productDetail = null; 
+		
+		List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
+		try {
+			pstmt = conn.prepareStatement
+					("select * from productDetail where pId = ?");
+			pstmt.setInt(1, pId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {				
+				productDetail = new ProductDetail();
+				productDetail.setSize(rs.getInt("size"));
+				productDetail.setPrice(rs.getInt("price"));
+				productDetail.setStock(rs.getInt("stock"));
+				/* productDetail.setCreatedAt(rs.getDate(4)); */
+				
+				productDetails.add(productDetail);
+			}
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return productDetails;
 	}
 }

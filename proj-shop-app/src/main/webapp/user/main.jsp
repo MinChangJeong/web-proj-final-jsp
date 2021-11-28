@@ -63,7 +63,7 @@
     <img src="../images/footer-banner1.png" alt="" />
     <img src="../images/footer-banner2.png" alt="" />
   </div>
-
 </div>
+
 </body>
 </html>

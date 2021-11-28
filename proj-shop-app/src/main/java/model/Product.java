@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Product {
 	private int id;
 	
@@ -10,6 +12,10 @@ public class Product {
 	private String productColor;
 	
 	private byte[] productImage;
+	
+	private String base64Image;
+	
+	private List<ProductDetail> productDetail;
 	
 	public Product() {}
 
@@ -67,6 +73,22 @@ public class Product {
 	public void setProductImage(byte[] productImage) {
 		this.productImage = productImage;
 	}
-	
 
+	public List<ProductDetail> getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(List<ProductDetail> productDetail) {
+		this.productDetail = productDetail;
+	}
+
+	public String getBase64Image() {
+		return base64Image;
+	}
+
+	public void setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
+	}
+
+	
 }

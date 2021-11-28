@@ -1,0 +1,19 @@
+@charset "EUC-KR";
+
+.page-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 50px;
+}
+.page-footer {
+	display: flex;
+	flex-direction: row;
+}
+.page-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 50px;
+}

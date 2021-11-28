@@ -1,9 +1,20 @@
 package dao;
 
-import java.sql.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
-import model.*;
-import util.*;
+import model.Product;
+import model.ProductDetail;
+import util.JdbcUtil;
 
 public class ProductDAO {
 	public int insertProduct(Connection conn, Product product) 
@@ -77,5 +88,65 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return product.getId();
+	}
+	
+	public List<Product> selectAllProducts(Connection conn) throws SQLException {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		Product product = null;
+		
+		List<Product> products = new ArrayList<Product>();
+		try {
+			pstmt = conn.prepareStatement
+					("select * from product");
+			rs = pstmt.executeQuery();
+			
+			ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+			ProductDetail productDetail = null;
+			
+			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
+			while(rs.next()) {
+				product = new Product();
+				product.setId(rs.getInt(1));
+				product.setProductName(rs.getString(2));
+				product.setProductExplain(rs.getString(3));
+				product.setProductColor(rs.getString(4));
+				
+				/* product.setProductImage(rs.getBytes(5)); */
+				Blob blob = rs.getBlob(5);
+				
+				InputStream inputStream = blob.getBinaryStream();
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				
+	            try {
+	            	byte[] buffer = new byte[4096];
+	                int bytesRead = -1;
+	                 
+	                while ((bytesRead = inputStream.read(buffer)) != -1) {
+	                    outputStream.write(buffer, 0, bytesRead);                  
+	                }
+	                byte[] imageBytes = outputStream.toByteArray();
+	                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	                
+	                product.setBase64Image(base64Image);
+	            }
+	            catch(IOException ex) {
+	            	ex.printStackTrace();
+	            }
+	            
+				productDetails = productDetailDAO.selectById(conn, product.getId());
+				product.setProductDetail(productDetails);
+				
+				products.add(product);
+			}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(rs);
+		}
+		return products;
 	}
 }
