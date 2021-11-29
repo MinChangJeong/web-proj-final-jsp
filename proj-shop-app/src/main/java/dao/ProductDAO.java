@@ -51,13 +51,42 @@ public class ProductDAO {
 			pstmt.setInt(1, pId);
 			rs = pstmt.executeQuery();
 			
+			ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+			ProductDetail productDetail = null;
+			
+			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
 			if (rs.next()){
 				product = new Product();
-				product.setProductName(rs.getString(1));
-				product.setProductExplain(rs.getString(2));
-				product.setProductColor(rs.getString(3));
-			}
+				product.setId(rs.getInt(1));
+				product.setProductName(rs.getString(2));
+				product.setProductExplain(rs.getString(3));
+				product.setProductColor(rs.getString(4));
+				
+				Blob blob = rs.getBlob(5);
+				
+				InputStream inputStream = blob.getBinaryStream();
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				
+	            try {
+	            	byte[] buffer = new byte[4096];
+	                int bytesRead = -1;
+	                 
+	                while ((bytesRead = inputStream.read(buffer)) != -1) {
+	                    outputStream.write(buffer, 0, bytesRead);                  
+	                }
+	                byte[] imageBytes = outputStream.toByteArray();
+	                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	                
+	                product.setBase64Image(base64Image);
+	            }
+	            catch(IOException ex) {
+	            	ex.printStackTrace();
+	            }
+	            
+	            productDetails = productDetailDAO.selectById(conn, product.getId());
+				product.setProductDetail(productDetails);
 			
+			}
 		} catch (SQLException e){
 			e.printStackTrace();
 		} finally {

@@ -23,16 +23,14 @@ public class User {
 
 	public User() {}
 
-	public User(int id, String username, String email, String password, String phoneNumber, String address, int shoesSize, Date createdAt) {
+	public User(String username, String email, String password, String phoneNumber, String address, int shoesSize) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.shoesSize = shoesSize;
-		this.createdAt = createdAt;
 	}
 	
 	public int getId() {

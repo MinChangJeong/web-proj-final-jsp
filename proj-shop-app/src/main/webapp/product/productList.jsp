@@ -33,6 +33,7 @@
 </style>
 </head>
 <body>
+
 <%
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
@@ -46,7 +47,7 @@
 
 	List<Product> products = new ArrayList<Product>();
 	products = productDAO.selectAllProducts(conn);
-	
+
 %>        
 
 <div class="main-container">
@@ -90,7 +91,12 @@
 			            </tr>
 					<c:set var="flag" value="true" />
 					</c:if>
-		        </c:forEach> 
+		        </c:forEach>
+		        <tr>
+	                <td>
+	                	<a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+	                </td>
+	            </tr> 
 			</table> 	            
     	</c:forEach>
   	</div>

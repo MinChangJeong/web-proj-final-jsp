@@ -20,19 +20,34 @@
 	
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
-%>
 
-<!-- User Insert -->
-<jsp:useBean id="user" class="model.User"/>
-<jsp:setProperty property="*" name="user"/> 
-
-<%
-	try {
+	User user = null;
+	
+	String username = request.getParameter("username");
+	String email = request.getParameter("email");
+	String password = request.getParameter("password");
+	String phoneNumber = request.getParameter("phoneNumber");
+	int shoesSize = Integer.parseInt(request.getParameter("shoesSize"));
+	String address = request.getParameter("address");
+	
+	user = new User(username, email, password, phoneNumber, address, shoesSize);
+	
+/* 	try {
 		UserDAO userDao= new UserDAO();
 		userDao.insertUser(conn, user);
 		
-	}catch (SQLException e){}
+	}catch (SQLException e){} */
+
+	System.out.println(request.getRequestURI());
+	System.out.println(request.getAuthType());
+	System.out.println();
+	
 %>
+
+<%-- <!-- User Insert -->
+<jsp:useBean id="user" class="model.User"/>
+<jsp:setProperty property="*" name="user"/>  --%>
+
 
 
 <div class="main-container">
