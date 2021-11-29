@@ -60,8 +60,8 @@
   </div>
   
   <div class="page-footer">
-    <img src="../images/footer-banner1.png" alt="" />
-    <img src="../images/footer-banner2.png" alt="" />
+    <img src="../images/banner1.jpg" alt="" />
+    <img src="../images/banner2.jpg" alt="" />
   </div>
 </div>
 

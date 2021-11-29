@@ -8,7 +8,29 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href="productList.css" rel="stylesheet" type="text/css" />
+<link href="./productList.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+	.page-body{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.product-list{
+		margin-top: 20px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.product-info{
+		margin-right: 20px;
+	}
+	.productImage{
+		border: 1px solid black;
+	}
+</style>
 </head>
 <body>
 <%
@@ -25,15 +47,6 @@
 	List<Product> products = new ArrayList<Product>();
 	products = productDAO.selectAllProducts(conn);
 	
- 	for(Product product : products) {
-		for(ProductDetail productDetail : product.getProductDetail()){
-			System.out.println(productDetail.getPrice());
-			System.out.println(productDetail.getSize());
-			System.out.println(productDetail.getStock());
-		}
-		break;
-	} 
-	
 %>        
 
 <div class="main-container">
@@ -46,28 +59,26 @@
   </div>
 
   <div class="page-body">
-<!--     <img src="../images/main-banner.png" alt="" /> -->
+  	<h1>Shop</h1>
   	<div class="product-list">
   		<c:set var="products" value="<%=products%>" />
 		<c:forEach var="product" items="${products}">           
-			<table border="1">
+			<table class="product-info" border="1">
 				<tr>
 	                <td>${product.productName}</td>
 	            </tr>
 	            <tr>
 	                <td>
-	                	<img alt="img" src="data:image/png;base64,${product.base64Image}" width="240" height="300"/>
+	                	<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" width="260" height="300"/>
 	                </td>
 	            </tr>
 	            <tr>
 	                <td>${product.productColor}</td>
 	            </tr>
 
-			</table> 
-			<c:set var="flag" value="false" />
- 			<c:forEach var="productDetail" items="${product.getProductDetail()}">
-	        	<c:if test="${not flag}">
-		        	<table border="1">
+				<c:set var="flag" value="false" />
+	 			<c:forEach var="productDetail" items="${product.getProductDetail()}">
+		        	<c:if test="${not flag}">
 						<tr>
 			                <td>${productDetail.price}</td>
 			            </tr>
@@ -77,20 +88,13 @@
 			            <tr>
 			                <td>${productDetail.stock}</td>
 			            </tr>
-					</table> 
-				<c:set var="flag" value="true" />
-				</c:if>
-	        </c:forEach> 
-	            
-    	</c:forEach>  
+					<c:set var="flag" value="true" />
+					</c:if>
+		        </c:forEach> 
+			</table> 	            
+    	</c:forEach>
   	</div>
   </div>
-
-  
-<!--   <div class="page-footer">
-    <img src="../images/banner1.jpg" alt="" />
-    <img src="../images/banner2.jpg" alt="" />
-  </div> -->
 </div>
 
 </body>
