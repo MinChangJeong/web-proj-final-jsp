@@ -32,15 +32,12 @@
 	
 	user = new User(username, email, password, phoneNumber, address, shoesSize);
 	
-/* 	try {
+ 	try {
 		UserDAO userDao= new UserDAO();
 		userDao.insertUser(conn, user);
 		
-	}catch (SQLException e){} */
+	}catch (SQLException e){} 
 
-	System.out.println(request.getRequestURI());
-	System.out.println(request.getAuthType());
-	System.out.println();
 	
 %>
 

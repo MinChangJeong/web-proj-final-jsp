@@ -12,12 +12,19 @@
 
 <style type="text/css">
 	.page-body{
+		width: 100%;
+  		overflow: auto;
+	  	-webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 	}
 	.product-list{
+	 	width: 200%;
+		background: #f5f9fa;
+	    border: 2px solid #eaf2f4;
+	    padding: 10px;
 		margin-top: 20px;
 		display: flex;
 		flex-direction: row;
@@ -29,6 +36,19 @@
 	}
 	.productImage{
 		border: 1px solid black;
+		height: 400px; 
+		width: 320px;
+	}
+	.page-footer {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin-top: 100px;
+	}
+	.page-footer img {
+		width: 50%;
+		height: 200px;
 	}
 </style>
 </head>
@@ -61,6 +81,8 @@
 
   <div class="page-body">
   	<h1>Shop</h1>
+  	
+	
   	<div class="product-list">
   		<c:set var="products" value="<%=products%>" />
 		<c:forEach var="product" items="${products}">           
@@ -70,24 +92,18 @@
 	            </tr>
 	            <tr>
 	                <td>
-	                	<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" width="260" height="300"/>
+	                	<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
 	                </td>
 	            </tr>
 	            <tr>
-	                <td>${product.productColor}</td>
+	                <td>컬러 : ${product.productColor}</td>
 	            </tr>
 
 				<c:set var="flag" value="false" />
 	 			<c:forEach var="productDetail" items="${product.getProductDetail()}">
 		        	<c:if test="${not flag}">
 						<tr>
-			                <td>${productDetail.price}</td>
-			            </tr>
-			            <tr>
-			                <td>${productDetail.size}</td>
-			            </tr>
-			            <tr>
-			                <td>${productDetail.stock}</td>
+			                <td>가격 : ${productDetail.price}원</td>
 			            </tr>
 					<c:set var="flag" value="true" />
 					</c:if>
@@ -100,6 +116,11 @@
 			</table> 	            
     	</c:forEach>
   	</div>
+  </div>
+  
+  <div class="page-footer">
+      <img src="../images/banner1.jpg" alt="img" />
+      <img src="../images/banner2.jpg" alt="img" />
   </div>
 </div>
 

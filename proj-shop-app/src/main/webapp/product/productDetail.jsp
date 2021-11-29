@@ -32,11 +32,7 @@
 		
 		Product product = new Product();
 		
-		System.out.println(request.getParameter("pId"));
-		
 		int pId = Integer.parseInt(request.getParameter("pId"));
-		
-		System.out.println(pId);
 		
 		product = productDAO.selectById(conn, pId);
 		
@@ -62,7 +58,7 @@
 		        </select>
 			</div>
 			<div class="sub-div">
-				<span>최근 거래가</span>
+				<span>상품 가격</span>
 				<!-- productDetail 가격 -->
 				<select>
 					<c:forEach var="productDetail" items="${product.getProductDetail()}">
@@ -76,10 +72,10 @@
 				<button class="interBtn" type="submit">관심상품</button>
 			</div>
 			<div class="product-sub-info">
-				<h3>상품 정보</h3>
+				<h3>상품 세부 정보</h3>
 				<div>
 					<!-- 출시일 정보 -->
-					<span>최근 거래가</span>
+					<span>상품 등록 날짜</span>
 					<span>21/11/19</span>
 				</div>
 				<div>
@@ -92,8 +88,8 @@
 	</div>
 	  
 	<div class="page-footer">
-	  <img src="../images/footer-banner1.png" alt="" />
-	  <img src="../images/footer-banner2.png" alt="" />
+	  <img src="../images/banner1.png" alt="" />
+	  <img src="../images/banner2.png" alt="" />
 	</div>
 </div>
 </body>
