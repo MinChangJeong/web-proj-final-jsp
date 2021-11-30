@@ -75,7 +75,7 @@
 					</div>
 					<div class="sub-div">
 						<!-- onclick으로 진행하면 될듯 -->
-						<button class="buyBtn" type="submit">구매</button>
+						<button class="buyBtn" type="submit"><a class="interestBtn" href="../purchase/purchase.jsp?pId=${productDetail.id}" >구매</a></button>
 						<button class="interBtn" type="submit"><a class="interestBtn" href="../interest/interest.jsp?pId=${productDetail.id}" >관심상품등록</a></button>
 					</div>
 					<% 

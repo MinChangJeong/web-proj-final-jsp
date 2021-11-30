@@ -24,9 +24,6 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
 
-	System.out.println(request.getParameter("servlet").equals("login"));
-	System.out.println(request.getParameter("servlet").equals("signup"));
-	
 	if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
 		
