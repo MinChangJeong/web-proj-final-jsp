@@ -11,19 +11,24 @@
 <link href="productDetail.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<%
-		Connection conn = null;
-		String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
-		String id = "root";
-		String pwd = "0216"; 
-		
-		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection(url, id, pwd);
+<%
+	Connection conn = null;
+	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
+	String id = "root";
+	String pwd = "0216"; 
 	
-		Interest interest = new Interest();
-		
-		
-	%>
+	Class.forName("com.mysql.jdbc.Driver");
+	conn = DriverManager.getConnection(url, id, pwd);
+
+ 	int pId = Integer.parseInt(request.getParameter("pId")); 
+	
+	/* session.getAttribute("USER") */
+	int uId = 1;
+			
+	InterestDAO interestDAO = new InterestDAO();
+	interestDAO.insertInterest(conn, uId, pId);
+	
+%>
 
 <script type="text/javascript">
 	alert("관심상품으로 등록 되었습니다.");

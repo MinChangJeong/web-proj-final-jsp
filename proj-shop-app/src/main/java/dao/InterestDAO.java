@@ -11,22 +11,21 @@ import model.*;
 import util.JdbcUtil;
 
 public class InterestDAO {
-	public void insertProductDetail(Connection conn, int uId, int pid) 
-			throws SQLException {
-		PreparedStatement pstmt=null; 
+	public void insertInterest(Connection conn, int uId, int pId) throws SQLException {
+		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement
-			("INSERT INTO productDetail (size, price, stock, createdAt, pId) VALUES (?, ?, ?, ?, ?);");
+			pstmt = conn.prepareStatement("INSERT INTO interest (createdAt, pId, uId) VALUES (?, ?, ?);");
 			
+			java.util.Date date = new java.util.Date(); java.sql.Date sDate = new
+			java.sql.Date(date.getTime()); 
+			pstmt.setDate(1, sDate);
 			
-			/*
-			 * java.util.Date date = new java.util.Date(); java.sql.Date sDate = new
-			 * java.sql.Date(date.getTime()); pstmt.setDate(4, sDate);
-			 */
+			pstmt.setInt(2, pId);
+			pstmt.setInt(3, uId);
 			
-			pstmt.executeUpdate(); 
-			
-		} catch (SQLException e){
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

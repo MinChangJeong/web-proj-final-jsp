@@ -83,17 +83,14 @@ public class ProductDAO {
 	            	ex.printStackTrace();
 	            }
 	            
-	            productDetails = productDetailDAO.selectById(conn, product.getId());
+	            productDetails = productDetailDAO.selectAllById(conn, product.getId());
 				product.setProductDetail(productDetails);
 			
 			}
 		} catch (SQLException e){
 			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn);
-			JdbcUtil.close(pstmt);
-			JdbcUtil.close(rs);
 		}
+		
 		return product;
 	}
 	
@@ -164,7 +161,7 @@ public class ProductDAO {
 	            	ex.printStackTrace();
 	            }
 	            
-				productDetails = productDetailDAO.selectById(conn, product.getId());
+				productDetails = productDetailDAO.selectAllById(conn, product.getId());
 				product.setProductDetail(productDetails);
 				
 				products.add(product);

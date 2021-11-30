@@ -81,8 +81,7 @@
 
   <div class="page-body">
   	<h1>Shop</h1>
-  	
-	
+  
   	<div class="product-list">
   		<c:set var="products" value="<%=products%>" />
 		<c:forEach var="product" items="${products}">           

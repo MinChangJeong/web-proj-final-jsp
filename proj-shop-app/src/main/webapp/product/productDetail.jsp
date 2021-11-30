@@ -8,7 +8,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href="productDetail.css" rel="stylesheet" type="text/css" />
+<link href="productDetail.css?after" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -36,6 +36,7 @@
 		
 		product = productDAO.selectById(conn, pId);
 		
+		System.out.println(product);
 	%>
 	<div class="page-body">
 	<c:set var="product" value="<%=product%>" />
@@ -48,48 +49,59 @@
 			<h1>${product.productName}</h1>
 			<!-- productExplain -->
 			<!-- <h2>(GS) Jordan 1 Retro High OG Patent Bred</h2> -->
-			<div class="sub-div">
-				<span>사이즈</span>
-				<!-- productSize-->
-				<select>
-					<c:forEach var="productDetail" items="${product.getProductDetail()}">
-						<option value="${productDetail.size }">${productDetail.size }</option>
-			        </c:forEach>
-		        </select>
-			</div>
-			<div class="sub-div">
-				<span>상품 가격</span>
-				<!-- productDetail 가격 -->
-				<select>
-					<c:forEach var="productDetail" items="${product.getProductDetail()}">
-						<option value="${productDetail.price }">${productDetail.price }원</option>
-			        </c:forEach>
-		        </select>
-			</div>
-			<div class="sub-div">
-				<!-- onclick으로 진행하면 될듯 -->
-				<button class="buyBtn" type="submit">구매</button>
-				<button class="interBtn" type="submit"><a href="../interest/interest.jsp?pId=${product.id}" >관심상품등록</a></button>
-			</div>
 			<div class="product-sub-info">
 				<h3>상품 세부 정보</h3>
+				
+				<%
+				ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+			
+				for(ProductDetail productDetail : product.getProductDetail()){
+					
+					ProductDetail target = new ProductDetail();
+					
+ 					target = productDetailDAO.selectById(conn, productDetail.getId());
+ 					
+					%>
+					<c:set var="productDetail" value="<%= target %>" />
+					<div class="sub-div">
+						<span>사이즈</span>
+						<!-- productSize-->
+						<span>${productDetail.size}</span>
+					</div>
+					<div class="sub-div">
+						<span>상품 가격</span>
+						<!-- productPrice-->
+						<span>${productDetail.price}</span>
+					</div>
+					<div class="sub-div">
+						<!-- onclick으로 진행하면 될듯 -->
+						<button class="buyBtn" type="submit">구매</button>
+						<button class="interBtn" type="submit"><a class="interestBtn" href="../interest/interest.jsp?pId=${productDetail.id}" >관심상품등록</a></button>
+					</div>
+					<% 
+					break;
+				}	
+			%>
+				
 				<div>
 					<!-- 출시일 정보 -->
 					<span>상품 등록 날짜</span>
 					<span>21/11/19</span>
 				</div>
+				
 				<div>
 					<!-- productColor -->
 					<span>컬러</span>
 					<span>${product.productColor }</span>
 				</div>
+			
 			</div>
 		</div>
 	</div>
 	  
 	<div class="page-footer">
-	  <img src="../images/banner1.png" alt="" />
-	  <img src="../images/banner2.png" alt="" />
+	  <img src="../images/banner1.jpg" alt="" />
+	  <img src="../images/banner2.jpg" alt="" />
 	</div>
 </div>
 </body>

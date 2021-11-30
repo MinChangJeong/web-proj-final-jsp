@@ -1,12 +1,18 @@
 package dao;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
+import model.Product;
 import model.ProductDetail;
 import util.JdbcUtil;
 
@@ -34,7 +40,36 @@ public class ProductDetailDAO {
 		}
 	}
 	
-	public List<ProductDetail> selectById(Connection conn, int pId) 
+	public ProductDetail selectById(Connection conn, int pdId) {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		ProductDetail productDetail = new ProductDetail();
+		
+		try {			
+			pstmt = conn.prepareStatement
+			("select * from productDetail where productDetail_id = ?");
+			pstmt.setInt(1, pdId);
+			rs = pstmt.executeQuery();
+			
+			System.out.println(rs);
+			
+			if(rs.next() ) {
+				productDetail.setId(rs.getInt("productDetail_id"));
+				productDetail.setSize(rs.getInt("size"));
+				productDetail.setPrice(rs.getInt("price"));
+				productDetail.setStock(rs.getInt("stock"));
+				
+				System.out.println(productDetail.getId());
+			}
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return productDetail;
+	}
+	
+	public List<ProductDetail> selectAllById(Connection conn, int pId) 
 			throws SQLException {
 		PreparedStatement pstmt=null; 
 		ResultSet rs = null;
@@ -50,6 +85,7 @@ public class ProductDetailDAO {
 			
 			while(rs.next()) {				
 				productDetail = new ProductDetail();
+				productDetail.setId(rs.getInt("productDetail_id"));
 				productDetail.setSize(rs.getInt("size"));
 				productDetail.setPrice(rs.getInt("price"));
 				productDetail.setStock(rs.getInt("stock"));
