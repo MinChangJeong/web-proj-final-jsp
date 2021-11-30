@@ -34,5 +34,43 @@ public class UserDAO {
 			JdbcUtil.close(pstmt);
 		}
 	}
+	
+	public boolean checkPassword(Connection conn, String email, String password) throws SQLException {
+	      
+		User user = selectByEmail(conn, email);
+      
+		if (user.getPassword().equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public User selectByEmail(Connection conn, String email) 
+	         throws SQLException {
+	      PreparedStatement pstmt=null; 
+	      ResultSet rs = null;
+	      User user = null; 
+	      
+	      try {
+	         pstmt = conn.prepareStatement
+	         ("select email, password from user where email = ?");
+	         pstmt.setString(1, email);
+	         rs = pstmt.executeQuery();
+	         
+	         if (rs.next()){
+	            user = new User();
+	            user.setEmail(rs.getString("email"));
+	            user.setPassword(rs.getString("password"));
+	         }
+	      } catch (SQLException e){
+	         e.printStackTrace();
+	      } finally {
+	         JdbcUtil.close(conn);
+	         JdbcUtil.close(pstmt);
+	         JdbcUtil.close(rs);
+	      }
+	      return user;
+	   }
 
 }
