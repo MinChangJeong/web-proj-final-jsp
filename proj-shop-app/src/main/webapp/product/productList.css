@@ -1,1 +1,41 @@
 @charset "EUC-KR";
+
+.page-body{
+	width: 100%;
+ 		overflow: auto;
+  	-webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.product-list{
+ 	width: 200%;
+	background: #f5f9fa;
+    border: 2px solid #eaf2f4;
+    padding: 10px;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.product-info{
+	margin-right: 20px;
+}
+.productImage{
+	border: 1px solid black;
+	height: 400px; 
+	width: 320px;
+}
+.page-footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+}
+.page-footer img {
+	width: 50%;
+	height: 200px;
+}

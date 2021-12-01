@@ -10,47 +10,6 @@
 <title>Insert title here</title>
 <link href="./productList.css" rel="stylesheet" type="text/css">
 
-<style type="text/css">
-	.page-body{
-		width: 100%;
-  		overflow: auto;
-	  	-webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
-	.product-list{
-	 	width: 200%;
-		background: #f5f9fa;
-	    border: 2px solid #eaf2f4;
-	    padding: 10px;
-		margin-top: 20px;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-	}
-	.product-info{
-		margin-right: 20px;
-	}
-	.productImage{
-		border: 1px solid black;
-		height: 400px; 
-		width: 320px;
-	}
-	.page-footer {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		margin-top: 100px;
-	}
-	.page-footer img {
-		width: 50%;
-		height: 200px;
-	}
-</style>
 </head>
 <body>
 
@@ -66,8 +25,16 @@
 	ProductDAO productDAO = new ProductDAO();
 
 	List<Product> products = new ArrayList<Product>();
-	products = productDAO.selectAllProducts(conn);
+	
+	if(request.getParameter("servlet").equals("search")) {
+		String target = request.getParameter("target");
 
+		products = productDAO.searchAllProducts(conn, target);
+	}
+	else {
+		products = productDAO.selectAllProducts(conn);
+	}
+	
 %>        
 
 <div class="main-container">
@@ -83,7 +50,7 @@
   	<h1>Shop</h1>
   
   	<div class="product-list">
-  		<c:set var="products" value="<%=products%>" />
+  		<c:set var="products" value="<%= products %>" />
 		<c:forEach var="product" items="${products}">           
 			<table class="product-info" border="1">
 				<tr>

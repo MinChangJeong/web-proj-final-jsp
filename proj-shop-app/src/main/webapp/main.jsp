@@ -3,14 +3,15 @@
     pageEncoding="utf-8"%>
 <%@ page import="java.io.*, java.util.*, java.sql.*, util.*" %>
 <%@page import="dao.*, model.*"%>
-   
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<link href=".//main.css" rel="stylesheet" type="text/css" />
 <meta charset="utf-8">
 <title>main</title>
-<link href="main.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 <%  request.setCharacterEncoding("utf-8");%>
 <%
@@ -45,10 +46,7 @@
 	else if(request.getParameter("servlet").equals("login")){
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
-		System.out.println(email);
-		System.out.println(password);
-		
+	
 	    boolean sign = true;
 	    try {
 	       UserDAO dao = new UserDAO();
@@ -69,13 +67,17 @@
 		}
 	}
 %>
+
+<!-- html -->
 <div class="main-container">
 
   <div class="page-header">
     <img src="../images/logo.png" alt="" />
     <div class="menu">
-      <div class="login-container">
-      </div>
+    	<form action="../product/productList.jsp?servlet=search" method="post">
+    		<input name="target" placeholder="Search your product..."/>
+    		<button name="btn" type="submit">검색</button>
+    	</form>
     </div>
   </div>
 
@@ -83,7 +85,6 @@
     <img src="../images/main-banner.png" alt="" />
   	<div class="products-container">
   		<h2>Just Dropped</h2>
-  		<span>발매 상품</span>
   		<div class="products-list">
   			<!-- 판매량이 가장많은 상품4개를 보여준다. -->
   			<div class="product">
@@ -93,10 +94,10 @@
   	</div>
   </div>
   
-  <div class="page-footer">
+<!--   <div class="page-footer">
     <img src="../images/banner1.jpg" alt="" />
     <img src="../images/banner2.jpg" alt="" />
-  </div>
+  </div> -->
 </div>
 
 </body>
