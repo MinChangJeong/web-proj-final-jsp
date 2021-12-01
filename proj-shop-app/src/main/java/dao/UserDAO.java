@@ -3,6 +3,8 @@ package dao;
 import java.sql.*;
 import java.util.Date;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import model.*;
 import util.*;
 
@@ -35,17 +37,6 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean checkPassword(Connection conn, String email, String password) throws SQLException {
-	      
-		User user = selectByEmail(conn, email);
-      
-		if (user.getPassword().equals(password)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	public User selectByEmail(Connection conn, String email) 
 	         throws SQLException {
 	      PreparedStatement pstmt=null; 
@@ -65,12 +56,36 @@ public class UserDAO {
 	         }
 	      } catch (SQLException e){
 	         e.printStackTrace();
-	      } finally {
-	         JdbcUtil.close(conn);
-	         JdbcUtil.close(pstmt);
-	         JdbcUtil.close(rs);
 	      }
 	      return user;
 	   }
-
+	
+	public boolean checkEmail(Connection conn, String email) throws SQLException {
+		User user = selectByEmail(conn, email);
+		
+		System.out.println(email);
+		System.out.println("user : "+ user);
+		
+		if(user!=null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
+	public boolean checkPassword(Connection conn, String email, String password) throws SQLException {
+	      
+		User user = selectByEmail(conn, email);
+      
+		if (user.getPassword().equals(password)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
 }

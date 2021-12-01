@@ -44,27 +44,53 @@
 		}catch (SQLException e){}
 	}
 	else if(request.getParameter("servlet").equals("login")){
+		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 	
-	    boolean sign = true;
+		System.out.println(email);
+		System.out.println(password);
+		
+	    boolean emailCheck = false;
+	    
 	    try {
 	       UserDAO dao = new UserDAO();
-	       sign = dao.checkPassword(conn, email, password);
+	       
+	       emailCheck = dao.checkEmail(conn, email);
 	    }
 	    catch (SQLException e){}
 	    
-	    if (sign) {
-	    	session.setAttribute("LOGIN", email);
-	    	System.out.println(session.getAttribute("LOGIN"));
-	    } else {
-		%>
-			<script>
-			   alert("로그인 아이디나 패스워드가 틀립니다.");
-			   history.go(-1);
-			</script>
-		<% 
-		}
+	    if (!emailCheck) {
+			%>
+				<script>
+				   alert("아이디가 틀립니다.");
+				   history.go(-1);
+				</script>
+			<% 
+	    	
+	    }else {
+	    	boolean passwordCheck = false;
+		    try {
+			       UserDAO dao = new UserDAO();
+			       
+			       passwordCheck = dao.checkPassword(conn, email, password);
+			    }
+			    catch (SQLException e){}
+			    
+			    if (passwordCheck) {
+			    	session.setAttribute("LOGIN", email);
+			    	System.out.println(session.getAttribute("LOGIN"));
+			    	
+			    } else {
+				%>
+					<script>
+					   alert("패스워드가 틀립니다.");
+					   history.go(-1);
+					</script>
+				<% 
+				}
+	    }
+	    
 	}
 %>
 

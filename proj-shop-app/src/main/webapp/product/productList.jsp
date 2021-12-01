@@ -62,7 +62,7 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <td>컬러 : ${product.productColor}</td>
+	                <td>컬러 : ${product.productColor}</t2d>
 	            </tr>
 
 				<c:set var="flag" value="false" />
