@@ -11,6 +11,8 @@ public class Purchase {
 
 	private String paymentMethod;
 	
+	private ProductDetail productDetail;
+	
 	public Purchase(Date createdAt, int totalPurchasePrice, String paymentMethod) {
 		super();
 		this.createdAt = createdAt;
@@ -49,7 +51,13 @@ public class Purchase {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
-	
-	
-	
+
+	public ProductDetail getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(ProductDetail productDetail) {
+		this.productDetail = productDetail;
+	}
+
 }

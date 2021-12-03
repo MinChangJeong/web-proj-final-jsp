@@ -8,9 +8,9 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href="productDetail.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<% request.setCharacterEncoding("utf-8"); %>
 <%
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
@@ -20,25 +20,7 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
 
- 	int pId = Integer.parseInt(request.getParameter("pId")); 
-	
-	String email = String.valueOf(session.getAttribute("LOGIN"));
-	
-	UserDAO userDAO = new UserDAO();
-	
-	User user = null;
-	
-	user = userDAO.selectByEmail(conn, email);
-	int uId = user.getId();
-			
-	InterestDAO interestDAO = new InterestDAO();
-	interestDAO.insertInterest(conn, uId, pId);
-	
 %>
 
-<script type="text/javascript">
-	alert("관심상품으로 등록 되었습니다.");
-	history.go(-1);
-</script>
 </body>
 </html>

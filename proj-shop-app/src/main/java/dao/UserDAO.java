@@ -37,6 +37,34 @@ public class UserDAO {
 		}
 	}
 	
+	public void insertAdmin(Connection conn, User user) 
+			throws SQLException {
+		PreparedStatement pstmt=null; 
+		try {
+			pstmt = conn.prepareStatement
+			("INSERT INTO user (username, email, password, phoneNumber, address, shoesSize, isAdmin, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+			pstmt.setString(1, "ADMIN");
+			pstmt.setString(2, "ADMIN");
+			pstmt.setString(3, "ADMIN");
+			pstmt.setString(4, "관리자 전화번호 없음");
+			pstmt.setString(5, "관리자 주소 없음");
+			pstmt.setInt(6, -1);
+			pstmt.setBoolean(7, true);
+			
+			java.util.Date date = new java.util.Date();
+			java.sql.Date sDate = new java.sql.Date(date.getTime());
+			pstmt.setDate(8, sDate);
+			
+			pstmt.executeUpdate();		
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(conn);
+			JdbcUtil.close(pstmt);
+		}
+	}
+	
 	public User selectByEmail(Connection conn, String email) 
 	         throws SQLException {
 	      PreparedStatement pstmt=null; 
@@ -62,9 +90,6 @@ public class UserDAO {
 	
 	public boolean checkEmail(Connection conn, String email) throws SQLException {
 		User user = selectByEmail(conn, email);
-		
-		System.out.println(email);
-		System.out.println("user : "+ user);
 		
 		if(user!=null) {
 			return true;

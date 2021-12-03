@@ -1,48 +1,50 @@
 @charset "EUC-KR";
 
 .signin-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid black;
+   display: flex;
+   flex-direction: column;
 }
-
 .page-header {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin-bottom: 50px;
-	border: 1px solid black;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin-bottom: 60px;
+   margin-top: 15px;
+   margin-left: 15px;
+   float: left;
 }
 .page-footer {
-	display: flex;
-	flex-direction: row;
-	position: absolute;
-	bottom: 0;
+   display: flex;
+   flex-direction: row;      
+   margin-top: 200px;
+}
+.page-footer img {
+   width: 100%;
+   height: 200px;
 }
 .page-body {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 50px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 50px;
 }
 .page-body form{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-top: 20px;
 }
 
 .page-body form input {
-	width: 300px;
-	height: 40px;
-	margin-bottom: 5px;
-	border: none;
-	border-bottom: 1px solid black;
+   width: 400px;
+   height: 40px;
+   margin-bottom: 10px;
+   border: none;
+   border-bottom: 1px solid black;
 }
 .page-body form button {
-	width: 310px;
-	height: 30px;
-	margin-top: 20px;
+   width: 410px;
+   height: 30px;
+   margin-top: 20px;
 }

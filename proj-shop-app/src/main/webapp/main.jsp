@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href=".//main.css" rel="stylesheet" type="text/css" />
+<link href="main.css" rel="stylesheet" type="text/css" />
 <meta charset="utf-8">
 <title>main</title>
 </head>
@@ -25,7 +25,9 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
 
-	if(request.getParameter("servlet").equals("signup")) {
+	if(request.getParameter("servlet") == null) {
+	}
+	else if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
 		
 	 	String username = request.getParameter("username");
@@ -41,6 +43,8 @@
 			UserDAO userDao= new UserDAO();
 			userDao.insertUser(conn, user);
 			
+			session.setAttribute("LOGIN", email);
+	    	System.out.println(session.getAttribute("LOGIN"));
 		}catch (SQLException e){}
 	}
 	else if(request.getParameter("servlet").equals("login")){
@@ -71,44 +75,67 @@
 	    }else {
 	    	boolean passwordCheck = false;
 		    try {
-			       UserDAO dao = new UserDAO();
-			       
-			       passwordCheck = dao.checkPassword(conn, email, password);
-			    }
-			    catch (SQLException e){}
-			    
-			    if (passwordCheck) {
-			    	session.setAttribute("LOGIN", email);
-			    	System.out.println(session.getAttribute("LOGIN"));
-			    	
-			    } else {
-				%>
-					<script>
-					   alert("패스워드가 틀립니다.");
-					   history.go(-1);
-					</script>
-				<% 
-				}
-	    }
-	    
+		       UserDAO dao = new UserDAO();
+		       
+		       passwordCheck = dao.checkPassword(conn, email, password);
+		    }
+		    catch (SQLException e){}
+		    
+		    if (passwordCheck) {
+		    	session.setAttribute("LOGIN", email);
+		    	System.out.println(session.getAttribute("LOGIN"));
+		    	
+		    	if(session.getAttribute("LOGIN").equals("ADMIN")){
+		    		response.sendRedirect("../admin/admin.html");
+		    	}
+		    	
+		    } else {
+			%>
+				<script>
+				   alert("패스워드가 틀립니다.");
+				   history.go(-1);
+				</script>
+			<% 
+			}
+	    }   
 	}
 %>
 
+
+
 <!-- html -->
 <div class="main-container">
+   <div class="page-header">
 
-  <div class="page-header">
-    <img src="../images/logo.png" alt="" />
-    <div class="menu">
-    	<form action="../product/productList.jsp?servlet=search" method="post">
-    		<input name="target" placeholder="Search your product..."/>
-    		<button name="btn" type="submit">검색</button>
-    	</form>
+   <a href="main.jsp"><img src="images/logo1.png" alt="" /></a>
+   <div class="menu">
+	   <c:set var ="servlet" value="<%=session.getAttribute(\"LOGIN\")%>"/>
+	   <c:choose>
+		   <c:when test="${empty servlet}">
+		         <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
+		         <a href="user/signin.html"><img src="images/login.png" alt="img" /></a>
+		         <a href="user/signup.html"><img src="images/join.png" alt="img" /></a>
+		         <img src="images/search.png" alt="img" />
+		   		 <form action="product/productList.jsp?servlet=search" method="post">
+		         	<input name="target" placeholder="Search your product..."/>
+		         	<button name="btn" type="submit">검색</button>
+		         </form>
+		   </c:when>
+		   
+		   <c:when test="${!empty servlet}">
+		      <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
+		      <a href="user/logout.jsp"><img src="images/logout.png" alt="" /></a>
+		      <form action="product/productList.jsp?servlet=search" method="post">
+		      	<input name="target" placeholder="Search your product..."/>
+		      	<button name="btn" type="submit">검색</button>
+		      </form>
+		   </c:when>
+	   </c:choose>
     </div>
   </div>
 
   <div class="page-body">
-    <img src="../images/main-banner.png" alt="" />
+    <img src="images/main-banner.png" alt="" />
   	<div class="products-container">
   		<h2>Just Dropped</h2>
   		<div class="products-list">
@@ -120,10 +147,10 @@
   	</div>
   </div>
   
-<!--   <div class="page-footer">
-    <img src="../images/banner1.jpg" alt="" />
-    <img src="../images/banner2.jpg" alt="" />
-  </div> -->
+ <div class="page-footer">
+    <img src="images/banner1.jpg" alt="" />
+    <img src="images/banner2.jpg" alt="" />
+  </div>
 </div>
 
 </body>

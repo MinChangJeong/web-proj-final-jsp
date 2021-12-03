@@ -3,41 +3,43 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href="signup.css" rel="stylesheet" type="text/css" />
+<link href=".//signup.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div>
-	<div class="page-header">
-	  <img src="../images/logo.png" alt="" />
-	  <div class="menu">
-	    <div class="login-container">
-	    </div>
-	  </div>
-	</div>
-	
-	<div class="page-body">
-		<h1>회원가입</h1>
-		<form action="..//main.jsp?servlet=signup" method="post">
-			<span>이름</span>
-			<input type="text" name="username" placeholder="예) gigamachijo" />
-			<span>이메일</span>
-			<input type="text" name="email" placeholder="예) gigamachijo@naver.com"/>
-			<span>비밀번호</span>
-			<input type="text" name="password" placeholder="영문, 숫자, 특수문자 포함 6~18문자"/>
-			<span>전화번호</span>
-			<input type="text" name="phoneNumber" placeholder="예) 010-1234-5678"/>
-			<span>신발사이즈</span>
-			<input type="text" name="shoesSize" placeholder="예) 280"/>
-			<span>주소</span>
-			<input type="text" name="address" placeholder="예) 한국산업기술대학교"/>
-			<input name="btn" type="submit" value="회원가입"/>
-		</form>
-	</div>
-	  
+<div class="signup-container">
+   <div class="page-header">
+     <img src="../images/logo1.png" alt="" />
+       <div class="menu">
+           <img src="../images/shop.png" alt="" />
+           <img src="../images/login.png" alt="" />
+           <img src="../images/join.png" alt="" />
+        </div>
+     </div>
+   
+   <div class="page-body">
+      <h1>회원가입</h1>
+      <form action="main.jsp?servlet=signup" method="post">
+         <span>이름</span>
+         <input type="text" name="username" placeholder="예) gigamachijo" />
+         <span>이메일</span>
+         <input type="text" name="email" placeholder="예) gigamachijo@naver.com"/>
+         <span>비밀번호</span>
+         <input type="text" name="password" placeholder="영문, 숫자, 특수문자 포함 6~18문자"/>
+         <span>전화번호</span>
+         <input type="text" name="phoneNumber" placeholder="예) 010-1234-5678"/>
+         <span>신발사이즈</span>
+         <input type="text" name="shoesSize" placeholder="예) 280"/>
+         <span>주소</span>
+         <input type="text" name="address" placeholder="예) 한국산업기술대학교"/>
+         <input name="btn" type="submit" value="회원가입"/>
+      </form>
+   </div>
+</div>     
   <div class="page-footer">
       <img src="../images/banner1.jpg" alt="img" />
       <img src="../images/banner2.jpg" alt="img" />
   </div>
-</div>
+  
+
 </body>
 </html>

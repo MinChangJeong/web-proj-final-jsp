@@ -89,6 +89,7 @@ public class ProductDetailDAO {
 				productDetail.setSize(rs.getInt("size"));
 				productDetail.setPrice(rs.getInt("price"));
 				productDetail.setStock(rs.getInt("stock"));
+				productDetail.setProduct_id(rs.getInt("pId"));
 				/* productDetail.setCreatedAt(rs.getDate(4)); */
 				
 				productDetails.add(productDetail);

@@ -13,6 +13,10 @@ public class ProductDetail {
 	
 	private Date createdAt;
 	
+	private Product product;
+	
+	private int product_id;
+	
 	public ProductDetail() {}
 
 	public ProductDetail( int size, int price, int stock, Date createdAt) {
@@ -61,6 +65,22 @@ public class ProductDetail {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
 	}
 	
 }
