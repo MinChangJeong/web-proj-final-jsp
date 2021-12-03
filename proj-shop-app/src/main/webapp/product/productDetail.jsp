@@ -83,7 +83,7 @@
                   <button class="interBtn" type="submit"><a class="interestBtn" href="../interest/interest.jsp?pId=${productDetail.id}" >관심상품등록</a></button>
                </div>
                <% 
-               break;
+               	break; 
             }   
          %>
             <hr width="600px" align="right" color= #d7d7d7 size="1px">
