@@ -20,7 +20,7 @@
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
 
- 	int pId = Integer.parseInt(request.getParameter("pId")); 
+ 	int pdId = Integer.parseInt(request.getParameter("pdId")); 
 	
 	String email = String.valueOf(session.getAttribute("LOGIN"));
 	
@@ -32,7 +32,7 @@
 	int uId = user.getId();
 			
 	InterestDAO interestDAO = new InterestDAO();
-	interestDAO.insertInterest(conn, uId, pId);
+	interestDAO.insertInterest(conn, uId, pdId);
 	
 %>
 

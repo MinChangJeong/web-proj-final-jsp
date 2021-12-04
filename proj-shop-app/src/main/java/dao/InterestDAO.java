@@ -11,7 +11,7 @@ import model.*;
 import util.JdbcUtil;
 
 public class InterestDAO {
-	public void insertInterest(Connection conn, int uId, int pId) throws SQLException {
+	public void insertInterest(Connection conn, int uId, int pdId) throws SQLException {
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement("INSERT INTO interest (createdAt, pId, uId) VALUES (?, ?, ?);");
@@ -20,7 +20,7 @@ public class InterestDAO {
 			java.sql.Date(date.getTime()); 
 			pstmt.setDate(1, sDate);
 			
-			pstmt.setInt(2, pId);
+			pstmt.setInt(2, pdId);
 			pstmt.setInt(3, uId);
 			
 			pstmt.executeUpdate();

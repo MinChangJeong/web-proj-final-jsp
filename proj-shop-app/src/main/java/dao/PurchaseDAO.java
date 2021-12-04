@@ -12,6 +12,28 @@ import model.ProductDetail;
 import model.Purchase;
 
 public class PurchaseDAO {
+	public void insertPurchase(Connection conn, int uId, int pdId, Purchase purchase) throws SQLException {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("INSERT INTO purchase (totalPurchasePrice, paymentMethod, createdAt, pId, uId) VALUES (?, ?, ?,? ,?);");
+			
+			pstmt.setInt(1, purchase.getTotalPurchasePrice());
+			pstmt.setString(2, purchase.getPaymentMethod());
+			
+			java.util.Date date = new java.util.Date(); java.sql.Date sDate = new
+			java.sql.Date(date.getTime()); 
+			pstmt.setDate(3, sDate);
+			
+			pstmt.setInt(4, pdId);
+			pstmt.setInt(5, uId);
+		
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Purchase> selectAllPurchaseByIds(Connection conn, int uId) 
 			throws SQLException {
 		PreparedStatement pstmt = null;
