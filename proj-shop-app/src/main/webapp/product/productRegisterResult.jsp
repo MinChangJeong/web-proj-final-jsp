@@ -1,17 +1,16 @@
 <%@page import="org.apache.tomcat.util.http.fileupload.IOUtils"%>
-<%@ page language="java" contentType="text/html; charset=euc-kr"
-    pageEncoding="EUC-KR"%>
+<%@page import="java.net.http.HttpRequest"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.nio.file.*, java.io.*, java.util.*, java.sql.*, util.*, com.oreilly.servlet.*, com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@page import="dao.*, model.*"%> 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="main.css" rel="stylesheet" type="text/css" />
 <title>Insert title here</title>
 </head>
 <body>
-<%  request.setCharacterEncoding("euc-kr"); %>
-
 <!-- product Insert -->
 <%
 	Connection conn = null;
@@ -25,14 +24,12 @@
 	String path ="C:\\Users\\jeong\\web-proj-final\\web-shop-app-jsp-master\\proj-shop-app\\src\\main\\webapp\\product\\uploadImages";
 	
 	MultipartRequest multi = 
-			new MultipartRequest(request, path, 5*1024*1024,"UTF-8",new DefaultFileRenamePolicy());
+			new MultipartRequest(request, path, 5*1024*1024,"euc-kr",new DefaultFileRenamePolicy());
 	
 	String productName = multi.getParameter("productName");
 	String productExplain = multi.getParameter("productExplain");
 	String productColor = multi.getParameter("productColor"); 
 	String photo = multi.getFilesystemName("photo");
-	
-	System.out.println(productExplain);
 	
 	ProductDAO productDAO = new ProductDAO();
 	
@@ -77,7 +74,12 @@
 	
 %>
 <div>
-╣Н╥оюл ©о╥А ╣г╬З╫ю╢о╢ы.
+<script>
+	alert("Л┐│М▓┬ К⌠╠К║²Л²╢ Л≥└Кё▄ К░≤Л≈┬Л┼╣К▀┬К▀╓.");
+</script>
+<%
+response.sendRedirect(".//productList.jsp");
+%>
 
 </div>
 </body>

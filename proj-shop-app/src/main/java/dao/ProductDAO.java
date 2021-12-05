@@ -19,6 +19,7 @@ import util.JdbcUtil;
 public class ProductDAO {
 	public int insertProduct(Connection conn, Product product) 
 			throws SQLException {
+		
 		PreparedStatement pstmt=null; 
 		int pId = -1;
 		try {
@@ -37,6 +38,7 @@ public class ProductDAO {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
+		
 		return pId ;
 	}
 	
@@ -99,6 +101,8 @@ public class ProductDAO {
 		PreparedStatement pstmt=null; 
 		ResultSet rs = null;
 		Product product = null; 
+		
+		System.out.println(productName);
 		try {
 			pstmt = conn.prepareStatement
 			("select product_id from product where productName = ?");
@@ -113,6 +117,7 @@ public class ProductDAO {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
+		System.out.println(product.getId());
 		return product.getId();
 	}
 	

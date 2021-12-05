@@ -52,7 +52,7 @@
          <!-- productName -->
          <h2><u>${product.productName}</u></h2>
          <!-- productExplain -->
-         <!-- <h2>(GS) Jordan 1 Retro High OG Patent Bred</h2> -->
+         <h4>${product.productExplain }</h4>
          <div class="product-sub-info">
             <h4>상품 세부 정보</h4>
             

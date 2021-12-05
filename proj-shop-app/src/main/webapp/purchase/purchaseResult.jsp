@@ -11,7 +11,7 @@
 </head>
 <body>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("euc-kr");
 
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
@@ -51,5 +51,10 @@
 	purchaseDAO.insertPurchase(conn, user.getId(), pdId, purchase);
 %>
 </body>
-구매가 완료 되었습니다.
+<script>
+	alert("상품 구매가 완료 되었습니다.");
+</script>
+<%
+response.sendRedirect("..//product/productList.jsp");
+%>
 </html>

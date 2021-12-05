@@ -1,6 +1,5 @@
 <%@page import="java.net.http.HttpRequest"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*, java.util.*, java.sql.*, util.*" %>
 <%@page import="dao.*, model.*"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,14 +7,13 @@
 <html>
 <head>
 <link href="main.css" rel="stylesheet" type="text/css" />
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>main</title>
 </head>
 
 <body>
-<%  request.setCharacterEncoding("utf-8");%>
+<%  request.setCharacterEncoding("euc-kr");%>
 <%
-	System.out.println(request.getParameter("servlet"));
 
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
@@ -26,6 +24,8 @@
 	conn = DriverManager.getConnection(url, id, pwd);
 
 	if(request.getParameter("servlet") == null) {
+		
+		
 	}
 	else if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
@@ -36,7 +36,7 @@
 		String phoneNumber = request.getParameter("phoneNumber");
 		int shoesSize = Integer.parseInt(request.getParameter("shoesSize"));
 		String address = request.getParameter("address");
-		
+	
 		user = new User(username, email, password, phoneNumber, address, shoesSize);
 		
 	 	try {
@@ -44,17 +44,13 @@
 			userDao.insertUser(conn, user);
 			
 			session.setAttribute("LOGIN", email);
-	    	System.out.println(session.getAttribute("LOGIN"));
-		}catch (SQLException e){}
+		}catch (SQLException e){} 
 	}
 	else if(request.getParameter("servlet").equals("login")){
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-	
-		System.out.println(email);
-		System.out.println(password);
-		
+
 	    boolean emailCheck = false;
 	    
 	    try {
@@ -83,7 +79,6 @@
 		    
 		    if (passwordCheck) {
 		    	session.setAttribute("LOGIN", email);
-		    	System.out.println(session.getAttribute("LOGIN"));
 		    	
 		    	if(session.getAttribute("LOGIN").equals("ADMIN")){
 		    		response.sendRedirect("../admin/admin.html");

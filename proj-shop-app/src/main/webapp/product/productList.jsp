@@ -69,42 +69,39 @@
 
   <div class="page-body">
   	<h1>Shop</h1>
-  
   	<div class="product-list">
-        <c:set var="products" value="<%=products%>" />
+      <c:set var="products" value="<%=products%>" />
       <c:forEach var="product" items="${products}">           
          <table class="product-info">
             <tr>
-                   <td style="border-collapse: collapse; " >
-                      <img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
-                   </td>
-               </tr>
-            <tr>
-                   <td><b> ${product.productName} </b></td>
-               </tr>
-     
-               <tr>
-                   <td>컬러 : ${product.productColor}</td>
-               </tr>
+               <td style="border-collapse: collapse; " >
+                  <img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
+               </td>
+           </tr>
+           <tr>
+	           <td><b> ${product.productName} </b></td>
+	       </tr>
+           <tr>
+               <td>컬러 : ${product.productColor}</td>
+           </tr>
 
-            <c:set var="flag" value="false" />
-             <c:forEach var="productDetail" items="${product.getProductDetail()}">
-                 <c:if test="${not flag}">
-                  <tr>
-                         <td> 가격 : <b> ${productDetail.price}원 </b></td>
-                     </tr>
+           <c:set var="flag" value="false" />
+           <c:forEach var="productDetail" items="${product.getProductDetail()}">
+               <c:if test="${not flag}">
+                   <tr>
+                       <td> 가격 : <b> ${productDetail.price}원 </b></td>
+                   </tr>
                <c:set var="flag" value="true" />
                </c:if>
-              </c:forEach>
-              <tr>
-                   <td>
-                      <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
-                   </td>
-               </tr> 
+          </c:forEach>
+          <tr>
+              <td>
+                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+              </td>
+          </tr> 
          </table>                
-       </c:forEach>
-     </div>
-  	
+      </c:forEach>
+    </div>
   </div>
   
   <div class="page-footer">
