@@ -13,6 +13,8 @@ public class Purchase {
 	
 	private ProductDetail productDetail;
 	
+	public Purchase() {}
+	
 	public Purchase(Date createdAt, int totalPurchasePrice, String paymentMethod) {
 		super();
 		this.createdAt = createdAt;

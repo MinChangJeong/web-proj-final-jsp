@@ -8,7 +8,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link href=".//purchase.css" rel="stylesheet" type="text/css">
+<link href="purchase.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%
@@ -33,8 +33,6 @@
 	ProductDAO productDAO = new ProductDAO();
 	product = productDAO.selectById(conn, productDetail.getProduct_id());
 	
-	System.out.println(product.getId());
-	
 	String userEmail = String.valueOf(session.getAttribute("LOGIN"));
 	
 	User user = new User();
@@ -42,7 +40,6 @@
 	UserDAO userDAO = new UserDAO();
 	user = userDAO.selectInfoByEmail(conn, userEmail);
 	
-	System.out.println(user.getAddress());
 	
 %>
 <div class="main-container">
@@ -57,14 +54,70 @@
   <c:set var="product" value="<%=product%>" />
   <c:set var="productDetail" value="<%=productDetail%>" />
   <div class="page-body">
+  	
   	<div class="product-info">
   		<img class="product-image" alt="" src="data:image/png;base64,${product.base64Image}" width="100" height="100"/>
   		<div class="product-info-sub">
   			<span>${product.productName}</span>
   			<span>${productDetail.size }</span>
-  			<span></span>
   		</div>
   	</div>
+  	
+  	<c:set var="user" value="<%=user%>" />
+  	<div class="user-info">
+  		<h3>배송 주소</h3>
+  		<div class="user-info-sub">
+  			<span>사용자 설정 배송 주소 : </span>
+  			<span>${user.address}</span>
+  		</div>
+  	</div>
+  	
+  	<div class="express-info">
+  		<h3>배송 벙법</h3>
+  		<div class="express-info-sub">
+  			<span>배송 밥법</span>
+  			<span>검수 후 배송 : 5 ~7 일 내에 도착예정</span>
+  		</div>
+ 	</div>
+ 	
+ 	<div class="purchase-info">
+  		<h3>최종 주문 정보</h3>
+  		<div class="purchase-main">
+  			<span>총 결제 금액</span>
+  			<span>${productDetail.price } 원</span>
+  		</div>
+  		<div class="purchase-sub">
+  			<span>즉시 구매가</span>
+  			<span>${productDetail.price } 원</span>
+  		</div>
+  		<div class="purchase-sub">
+  			<span>검수비</span>
+  			<span>무료</span>
+  		</div>
+  		<div class="purchase-sub">
+  			<span>배송비</span>
+  			<span>1000원</span>
+  		</div>
+ 	</div>
+ 	
+ 	<div class="payment-info">
+  		<h3>결제 방법</h3>
+  		<div class="payment-info-sub">
+  			<span>배송 밥법</span>
+  			<form action="purchaseResult.jsp?pdId=${productDetail.id }" method="post">
+  				<select name="paymentMethod">
+  					<option value="신용/체크카드">신용/체크카드</option>
+  					<option value="네이버페이">네이버페이</option>
+  					<option value="카카오페이">카카오페이</option>
+  					<option value="토스">토스</option>
+  					<option value="페이코">페이코</option>
+  				</select>
+  				<button type="submit">결제하기</button> 				
+  			</form>
+  		</div>
+ 	</div>
+ 	
+ 	
   </div>
   
   <div class="page-footer">

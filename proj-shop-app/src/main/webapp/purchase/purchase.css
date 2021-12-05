@@ -28,6 +28,7 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
+   height: 100%;
 }
 .product-info {
    display: flex;
@@ -46,4 +47,66 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
+}
+.user-info {
+	display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top : 20px;
+   margin-bottom: 20px;
+	background-color:white;
+    width: 700px;
+    height: 140px;
+}
+
+.express-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top : 20px;
+    margin-bottom: 20px;
+	background-color: white;
+    width: 700px;
+    height: 140px;
+}
+
+.purchase-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top : 20px;
+    margin-bottom: 20px;
+	background-color: white;
+    width: 700px;
+    height: 200px;
+}
+
+.purchase-main{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	margin-bottom: 10px;
+}
+
+.purchase-sub{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top : 20px;
+    margin-bottom: 20px;
+	background-color: white;
+    width: 700px;
+    height: 200px;
 }

@@ -52,16 +52,13 @@ public class ProductDetailDAO {
 			pstmt.setInt(1, pdId);
 			rs = pstmt.executeQuery();
 			
-			System.out.println(rs);
-			
 			if(rs.next() ) {
 				productDetail.setId(rs.getInt("productDetail_id"));
 				productDetail.setSize(rs.getInt("size"));
 				productDetail.setPrice(rs.getInt("price"));
 				productDetail.setStock(rs.getInt("stock"));
 				productDetail.setProduct_id(rs.getInt("pId"));
-				
-				System.out.println(productDetail.getId());
+		
 			}
 			
 		} catch (SQLException e){
