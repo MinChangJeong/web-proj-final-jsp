@@ -81,7 +81,7 @@
 		         <a href="../user/signup.html"><img src="../images/join.png" alt="" /></a>
 		         <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>
         		 <div id="toc-content">
-	        		<form action="product/productList.jsp?servlet=search" method="post">
+	        		<form action="productList.jsp?servlet=search" method="post">
 	                	<input name="target" placeholder="Search your product..."/>
 	                    <button name="btn" type="submit">검색</button>
 	        		</form>
@@ -93,7 +93,7 @@
 		      	<a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
 		        <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>
         		<div id="toc-content">
-	        		<form action="product/productList.jsp?servlet=search" method="post">
+	        		<form action="productList.jsp?servlet=search" method="post">
 	                	<input name="target" placeholder="Search your product..."/>
 	                    <button name="btn" type="submit">검색</button>
 	        		</form>
