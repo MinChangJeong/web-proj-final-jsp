@@ -66,3 +66,14 @@ a:hover {
 a:active {
    color: gray;
 }
+
+#toc-content {
+	display: none;
+}
+#toc-toggle {
+  cursor: pointer;
+  color: #2962ff;
+}
+#toc-toggle:hover {
+  text-decoration: underline;
+}

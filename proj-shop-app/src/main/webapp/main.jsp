@@ -112,8 +112,19 @@
 	    }   
 	}
 %>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript"></script>
+<script>
+	function openCloseToc() {
+      if(document.getElementById('toc-content').style.display === 'block') {
+        document.getElementById('toc-content').style.display = 'none';
+        
+      } else {
+        document.getElementById('toc-content').style.display = 'block';
+        
+      }
+    }
+</script>
 
 <!-- html -->
 <div class="main-container">
@@ -127,20 +138,32 @@
 		         <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 		         <a href="user/signin.html"><img src="images/login.png" alt="img" /></a>
 		         <a href="user/signup.html"><img src="images/join.png" alt="img" /></a>
-		         <img src="images/search.png" alt="img" />
+		         
+<!-- 		         <img src="images/search.png" alt="img" />
 		   		 <form action="product/productList.jsp?servlet=search" method="post">
 		         	<input name="target" placeholder="Search your product..."/>
 		         	<button name="btn" type="submit">검색</button>
-		         </form>
+		         </form> -->
+		         
+				<img src="images/search.png" alt="img" onclick="openCloseToc()"/>
+        		<div id="toc-content">
+	        		<form action="product/productList.jsp?servlet=search" method="post">
+	                	<input name="target" placeholder="Search your product..."/>
+	                    <button name="btn" type="submit">검색</button>
+	        		</form>
+       			</div>
 		   </c:when>
 		   
 		   <c:when test="${!empty servlet}">
 		      <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 		      <a href="user/logout.jsp"><img src="images/logout.png" alt="" /></a>
-		      <form action="product/productList.jsp?servlet=search" method="post">
-		      	<input name="target" placeholder="Search your product..."/>
-		      	<button name="btn" type="submit">검색</button>
-		      </form>
+		      <img src="images/search.png" alt="img" onclick="openCloseToc()"/>
+        	  <div id="toc-content">
+	          	<form action="product/productList.jsp?servlet=search" method="post">
+	            	<input name="target" placeholder="Search your product..."/>
+	                <button name="btn" type="submit">검색</button>
+	            </form>
+       	      </div>
 		   </c:when>
 	   </c:choose>
     </div>

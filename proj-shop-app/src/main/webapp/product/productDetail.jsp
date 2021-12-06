@@ -14,11 +14,10 @@
 
 <div class="product-container">
    <div class="page-header">
-     <img src="../images/logo1.png" alt="" />
+     <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
      <div class="menu">
-        <img src="../images/shop.png" alt="" />
-        <img src="../images/logout.png" alt="" />
-        <img src="../images/search.png" alt="" />
+        <a href="productList.jsp"><img src="../images/shop.png" alt="" /></a>
+        <a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
      </div>
    </div>
    <!-- get product info -->

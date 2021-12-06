@@ -23,90 +23,138 @@
    height: 200px;
 }
 .page-body{
-   background-color:#fafafa;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   height: 100%;
+    background-color:#fafafa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 .product-info {
    display: flex;
    flex-direction: row;
-   justify-content: center;
+   justify-content: left;
    align-items: center;
-   margin-top : 20px;
-   margin-bottom: 20px;
+   margin-top : 40px;
+   margin-bottom: 10px;
     background-color:white;
     width: 700px;
     height: 140px;
 }
+.product-image {
+   background-color: #f5f9fa;
+   margin-left: 30px;
+   border-radius: 15px;
+}
 .product-info-sub{
-	margin-left: 30px;
-	display: flex;
+   margin-left: 30px;
+   display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
 }
 .user-info {
-	display: flex;
+   display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
-   margin-top : 20px;
-   margin-bottom: 20px;
-	background-color:white;
+   align-items: left;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   background-color:white;
     width: 700px;
-    height: 140px;
+    height: 220px;
 }
-
+.user-info-sub{
+   margin-left: 20px;
+   margin-bottom: 10px;
+}
 .express-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-top : 20px;
-    margin-bottom: 20px;
-	background-color: white;
+    align-items: left;
+    margin-bottom: 10px;
+   background-color: white;
     width: 700px;
     height: 140px;
 }
-
+.express-info-sub{
+   margin-left: 20px;
+   margin-bottom: 10px;
+}
 .purchase-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-top : 20px;
-    margin-bottom: 20px;
-	background-color: white;
+    align-items: left;
+    margin-bottom: 10px;
+   background-color: white;
     width: 700px;
     height: 200px;
 }
 
 .purchase-main{
-	display: flex;
+   display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-	margin-bottom: 10px;
+   margin-bottom: 5px;
+   margin-left: 20px;
+    margin-right: 20px;
 }
 
 .purchase-sub{
-	display: flex;
+   display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 3px;
+}
+.purchase-sub2{
+   display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: left;
+   margin-left: 20px;
+    margin-right: 20px;
+   margin-bottom: 10px;
 }
 
 .payment-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-top : 20px;
+    align-items: left;
     margin-bottom: 20px;
-	background-color: white;
+   background-color: white;
     width: 700px;
     height: 200px;
+}
+.payment-info-sub{
+   margin-bottom: 20px;
+   margin-left: 20px;
+}
+button {
+   width: 700px;
+   height: 40px;
+   background-color: #bec8d7;
+   border: none;
+   color: white;
+   text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 6px;
+    margin-botton: 10px;   
+}
+.buttonWrap{
+   display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+h3 {
+   margin-left: 20px;
 }
