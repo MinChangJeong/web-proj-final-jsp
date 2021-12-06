@@ -53,8 +53,9 @@
 </body>
 <script>
 	alert("상품 구매가 완료 되었습니다.");
+	<%
+		response.sendRedirect("..//product/productList.jsp");
+	%>
 </script>
-<%
-response.sendRedirect("..//product/productList.jsp");
-%>
+
 </html>

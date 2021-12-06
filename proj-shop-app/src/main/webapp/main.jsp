@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="main.css" rel="stylesheet" type="text/css" />
+<link href=".//main.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>main</title>
 </head>
@@ -22,10 +22,27 @@
 	
 	Class.forName("com.mysql.jdbc.Driver");
 	conn = DriverManager.getConnection(url, id, pwd);
-
+	
+	List<Product> products = new ArrayList<>();
+	
+	
 	if(request.getParameter("servlet") == null) {
+		PurchaseDAO purchaseDAO = new PurchaseDAO();
+		List<Integer> productDetailIds = purchaseDAO.selectTopByProductId(conn);
 		
+		ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+		ProductDAO productDAO = new ProductDAO();
 		
+		Product product = new Product();
+		
+		for(int productDetailId : productDetailIds){
+			int pId = productDetailDAO.getProductId(conn, productDetailId);
+			product = productDAO.selectById(conn, pId);
+			
+			products.add(product);
+			System.out.println(product.getId());
+		}
+		System.out.println(products);
 	}
 	else if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
@@ -133,12 +150,40 @@
     <img src="images/main-banner.png" alt="" />
   	<div class="products-container">
   		<h2>Just Dropped</h2>
-  		<div class="products-list">
-  			<!-- 판매량이 가장많은 상품4개를 보여준다. -->
-  			<div class="product">
-  				
-  			</div>
-  		</div>
+  		<h3>발매 상품</h3>
+  		<div class="product-list">
+	      <c:set var="products" value="<%=products%>" />
+	      <c:forEach var="product" items="${products}">           
+	         <table class="product-info">
+	            <tr>
+	               <td style="border-collapse: collapse; " >
+	                  <img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
+	               </td>
+	           </tr>
+	           <tr>
+		           <td><b> ${product.productName} </b></td>
+		       </tr>
+	           <tr>
+	               <td>컬러 : ${product.productColor}</td>
+	           </tr>
+	
+	           <c:set var="flag" value="false" />
+	           <c:forEach var="productDetail" items="${product.getProductDetail()}">
+	               <c:if test="${not flag}">
+	                   <tr>
+	                       <td> 가격 : <b> ${productDetail.price}원 </b></td>
+	                   </tr>
+	               <c:set var="flag" value="true" />
+	               </c:if>
+	          </c:forEach>
+	          <tr>
+	              <td>
+	                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+	              </td>
+	          </tr> 
+	         </table>                
+	      </c:forEach>
+	    </div>
   	</div>
   </div>
   

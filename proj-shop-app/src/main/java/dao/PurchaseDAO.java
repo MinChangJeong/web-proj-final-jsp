@@ -79,4 +79,25 @@ public class PurchaseDAO {
 		return purchases;
 	}
 	
+	public List<Integer> selectTopByProductId(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		List<Integer> productDetailIds = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement
+				("select pId, count(pId) as cnt from purchase group by pId order by cnt desc limit 4");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				productDetailIds.add(rs.getInt("pId"));
+			}
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+	    }
+		System.out.println(productDetailIds);
+		return productDetailIds;
+	}
+	
 }

@@ -40,6 +40,28 @@ public class ProductDetailDAO {
 		}
 	}
 	
+	public int getProductId(Connection conn, int pdId) {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		int product_id = -1;
+		
+		try {			
+			pstmt = conn.prepareStatement
+			("select pId from productDetail where productDetail_id = ?");
+			pstmt.setInt(1, pdId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next() ) {
+				product_id = rs.getInt("pId");
+			}
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return product_id;
+	}
+	
 	public ProductDetail selectById(Connection conn, int pdId) {
 		PreparedStatement pstmt=null; 
 		ResultSet rs = null;

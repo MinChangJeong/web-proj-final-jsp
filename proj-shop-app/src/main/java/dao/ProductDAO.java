@@ -33,7 +33,7 @@ public class ProductDAO {
 			
 			pstmt.executeUpdate();
 			
-			pId = selectByName(conn, product.getProductName());
+			pId = selectByExplain(conn, product.getProductExplain());
 			
 		} catch (SQLException e){
 			e.printStackTrace();
@@ -96,17 +96,16 @@ public class ProductDAO {
 		return product;
 	}
 	
-	public int selectByName(Connection conn, String productName) 
+	public int selectByExplain(Connection conn, String productExplain) 
 			throws SQLException {
 		PreparedStatement pstmt=null; 
 		ResultSet rs = null;
 		Product product = null; 
 		
-		System.out.println(productName);
 		try {
 			pstmt = conn.prepareStatement
-			("select product_id from product where productName = ?");
-			pstmt.setString(1, productName);
+			("select product_id from product where productExplain = ?");
+			pstmt.setString(1, productExplain);
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()){
@@ -117,7 +116,6 @@ public class ProductDAO {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
-		System.out.println(product.getId());
 		return product.getId();
 	}
 	
