@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href=".//main.css" rel="stylesheet" type="text/css" />
+<link href="main.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>main</title>
 </head>
@@ -227,6 +227,7 @@
     <img src="images/banner1.jpg" alt="" />
     <img src="images/banner2.jpg" alt="" />
   </div>
+  <img src="images/banner3.png" alt="img" />
 </div>
 
 </body>

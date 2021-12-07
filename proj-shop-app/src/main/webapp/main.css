@@ -23,8 +23,6 @@
 }
 .page-body{
    width: 100%;
-     overflow: auto;
-   -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
    display: flex;
    flex-direction: column;
    justify-content: center;

@@ -43,7 +43,7 @@
 <div class="main-container">
 
   <div class="page-header">
-    <img src="../images/logo1.png" alt="" />
+    <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
     <div class="menu">
        <a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
     </div>
@@ -117,8 +117,8 @@
            </form>
         </div>
     </div>
-
-</div>
+  </div>
+  
   <div class="page-footer">
       <img src="../images/banner3.png" alt="img" />
   </div>
