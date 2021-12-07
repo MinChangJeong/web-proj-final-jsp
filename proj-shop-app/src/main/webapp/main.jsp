@@ -43,6 +43,8 @@
 			System.out.println(product.getId());
 		}
 		System.out.println(products);
+		
+
 	}
 	else if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
@@ -67,7 +69,7 @@
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
+		
 	    boolean emailCheck = false;
 	    
 	    try {
@@ -98,7 +100,7 @@
 		    	session.setAttribute("LOGIN", email);
 		    	
 		    	if(session.getAttribute("LOGIN").equals("ADMIN")){
-		    		response.sendRedirect("../admin/admin.html");
+		    		response.sendRedirect("admin/admin.html");
 		    	}
 		    	
 		    } else {
@@ -199,11 +201,22 @@
 	               <c:set var="flag" value="true" />
 	               </c:if>
 	          </c:forEach>
-	          <tr>
-	              <td>
-	                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
-	              </td>
-	          </tr> 
+	          <%
+		      	if(session.getAttribute("LOGIN")!=null && session.getAttribute("LOGIN").equals("ADMIN")){
+		    			
+		    	}
+		      	else {
+		      		%>
+		      	      <tr>
+			              <td>
+			                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+			              </td>
+			          </tr> 
+		      		<% 
+		      	}
+	          %>
+	          
+	          
 	         </table>                
 	      </c:forEach>
 	    </div>

@@ -130,11 +130,20 @@
                <c:set var="flag" value="true" />
                </c:if>
           </c:forEach>
-          <tr>
-              <td>
-                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
-              </td>
-          </tr> 
+          <%
+	      	if(session.getAttribute("LOGIN")!=null && session.getAttribute("LOGIN").equals("ADMIN")){
+	    			
+	    	}
+	      	else {
+	      		%>
+	      	      <tr>
+		              <td>
+		                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+		              </td>
+		          </tr> 
+	      		<% 
+	      	}
+          %>
          </table>                
       </c:forEach>
     </div>

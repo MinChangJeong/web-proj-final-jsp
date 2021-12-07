@@ -81,7 +81,7 @@
         <h3>최종 주문 정보</h3>
         <div class="purchase-main">
            <span>총 결제 금액</span>
-           <span> ${productDetail.price }원</span>
+           <span> ${productDetail.price+1000 }원</span>
         </div>
         <hr width="670px" align="center" color= #d7d7d7 size="1px">
         
