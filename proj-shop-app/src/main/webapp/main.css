@@ -11,8 +11,10 @@
    margin-top: 15px;
    margin-left: 15px;
    float: left;
+   width: 100%;
 }
 .page-footer {
+   width:100%;
    display: flex;
    flex-direction: row;      
    margin-top: 200px;

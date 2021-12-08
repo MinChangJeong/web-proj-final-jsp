@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.*;
-import util.JdbcUtil;
 
 public class InterestDAO {
 	public void insertInterest(Connection conn, int uId, int pdId) throws SQLException {

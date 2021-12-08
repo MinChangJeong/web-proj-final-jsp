@@ -1,4 +1,3 @@
-<%@page import="java.net.http.HttpRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*, java.util.*, java.sql.*, util.*" %>
 <%@page import="dao.*, model.*"%>
@@ -137,23 +136,17 @@
 	   <c:set var ="servlet" value="<%=session.getAttribute(\"LOGIN\")%>"/>
 	   <c:choose>
 		   <c:when test="${empty servlet}">
-		         <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
-		         <a href="user/signin.html"><img src="images/login.png" alt="img" /></a>
-		         <a href="user/signup.html"><img src="images/join.png" alt="img" /></a>
-		         
-<!-- 		         <img src="images/search.png" alt="img" />
-		   		 <form action="product/productList.jsp?servlet=search" method="post">
-		         	<input name="target" placeholder="Search your product..."/>
-		         	<button name="btn" type="submit">검색</button>
-		         </form> -->
-		         
-				<img src="images/search.png" alt="img" onclick="openCloseToc()"/>
-        		<div id="toc-content">
-	        		<form action="product/productList.jsp?servlet=search" method="post">
-	                	<input name="target" placeholder="Search your product..."/>
-	                    <button name="btn" type="submit">검색</button>
-	        		</form>
-       			</div>
+	         <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
+	         <a href="user/signin.html"><img src="images/login.png" alt="img" /></a>
+	         <a href="user/signup.html"><img src="images/join.png" alt="img" /></a>
+	         
+			 <img src="images/search.png" alt="img" onclick="openCloseToc()"/>
+       		 <div id="toc-content">
+        		<form action="product/productList.jsp?servlet=search" method="post">
+                	<input name="target" placeholder="Search your product..."/>
+                    <button name="btn" type="submit">검색</button>
+        		</form>
+      			 </div>
 		   </c:when>
 		   
 		   <c:when test="${!empty servlet}">
