@@ -66,8 +66,6 @@
 			
 			products = pages.getProducts();
 			
-			System.out.println(pages.getCurrentPageNumber());
-			System.out.println(pages.getPageTotalCount());
 		}
 	 	else if(request.getParameter("servlet").equals("search")){
 	  		String target = request.getParameter("target");
@@ -82,8 +80,6 @@
 			
 			products = pages.getProducts();
 			
-			System.out.println(pages.getCurrentPageNumber());
-			System.out.println(pages.getPageTotalCount());
 		}
 	 	else if(request.getParameter("servlet").equals("search")){
 	  		String target = request.getParameter("target");
@@ -96,33 +92,35 @@
 %>      
 <div class="main-container">
   <div class="page-header">
-    <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
-    <div class="menu">
-	    <c:set var ="servlet" value="<%=session.getAttribute(\"LOGIN\")%>"/>
-	    <c:choose>
-	         <c:when test="${empty servlet}">
-		         <a href="productList.jsp"><img src="../images/shop.png" alt="" /></a>
-		         <a href="../user/signin.html"><img src="../images/login.png" alt="" /></a>
-		         <a href="../user/signup.html"><img src="../images/join.png" alt="" /></a>
-		         <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>
-        		 <div id="toc-content">
-	        		<form action="productList.jsp?servlet=search" method="post">
-	                	<input name="target" placeholder="Search your product..."/>
-	                    <button name="btn" type="submit">검색</button>
-	        		</form>
-       			 </div>
-	       	</c:when>
-	   
-		    <c:when test="${!empty servlet}">
-		    	<a href="productList.jsp"><img src="../images/shop.png" alt="" /></a>
-		      	<a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
-		        <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>
-        		<div id="toc-content">
-	        		<form action="productList.jsp?servlet=search" method="post">
-	                	<input name="target" placeholder="Search your product..."/>
-	                    <button name="btn" type="submit">검색</button>
-	        		</form>
-       			</div>
+
+   <a href="main.jsp"><img src="images/logo1.png" alt="" /></a>
+   <div class="menu">
+	   <c:set var ="servlet" value="<%=session.getAttribute(\"LOGIN\")%>"/>
+	   <c:choose>
+		   <c:when test="${empty servlet}">
+	         <a href="../product/productList.jsp"><img src="../images/shop.png" alt="" /></a>
+	         <a href="../user/signin.html"><img src="../images/login.png" alt="img" /></a>
+	         <a href="../user/signup.html"><img src="../images/join.png" alt="img" /></a>
+	      	 <div id="toc-content">
+        		<form action="productList.jsp?servlet=search" method="post">
+                	<input class="target" name="target" placeholder="Search your product..."/>
+                    <button name="btn" type="submit" style="display: none">검색</button>
+        		</form>
+      		 </div>
+			 <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>
+       		 
+		   </c:when>
+		   
+		   <c:when test="${!empty servlet}">
+		      <a href="../product/productList.jsp"><img src="../images/shop.png" alt="" /></a>
+		      <a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
+		      <div id="toc-content">
+        		<form action="productList.jsp?servlet=search" method="post">
+                	<input class="target" name="target" placeholder="Search your product..."/>
+                    <button name="btn" type="submit" style="display: none">검색</button>
+        		</form>
+      		  </div>
+		      <img src="../images/search.png" alt="img" onclick="openCloseToc()"/>  
 		   </c:when>
 	   </c:choose>
     </div>

@@ -13,7 +13,6 @@
 <body>
 <%  request.setCharacterEncoding("euc-kr");%>
 <%
-
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
 	String id = "root";
@@ -135,31 +134,30 @@
 	         <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 	         <a href="user/signin.html"><img src="images/login.png" alt="img" /></a>
 	         <a href="user/signup.html"><img src="images/join.png" alt="img" /></a>
-	         
-			 <img src="images/search.png" alt="img" onclick="openCloseToc()"/>
-       		 <div id="toc-content">
+	      	 <div id="toc-content">
         		<form action="product/productList.jsp?servlet=search" method="post">
-                	<input name="target" placeholder="Search your product..."/>
-                    <button name="btn" type="submit">검색</button>
+                	<input class="target" name="target" placeholder="Search your product..."/>
+                    <button name="btn" type="submit" style="display: none">검색</button>
         		</form>
       		 </div>
+			 <img src="images/search.png" alt="img" onclick="openCloseToc()"/>
+       		 
 		   </c:when>
 		   
 		   <c:when test="${!empty servlet}">
 		      <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 		      <a href="user/logout.jsp"><img src="images/logout.png" alt="" /></a>
-		      <img src="images/search.png" alt="img" onclick="openCloseToc()"/>
-        	  <div id="toc-content">
-	          	<form action="product/productList.jsp?servlet=search" method="post">
-	            	<input name="target" placeholder="Search your product..."/>
-	                <button name="btn" type="submit">검색</button>
-	            </form>
-       	      </div>
+		      <div id="toc-content">
+        		<form action="product/productList.jsp?servlet=search" method="post">
+                	<input class="target" name="target" placeholder="Search your product..."/>
+                    <button name="btn" type="submit" style="display: none">검색</button>
+        		</form>
+      		  </div>
+		      <img src="images/search.png" alt="img" onclick="openCloseToc()"/>  
 		   </c:when>
 	   </c:choose>
     </div>
   </div>
-
   <div class="page-body">
     <img src="images/main-banner.png" alt="" />
   	<div class="products-container">
@@ -227,6 +225,5 @@
   </div>
   <img src="images/banner3.png" alt="img" />
 </div>
-
 </body>
 </html>
