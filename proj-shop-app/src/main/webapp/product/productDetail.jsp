@@ -6,12 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="EUC-KR" name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
-<link href="productDetail.css?after" rel="stylesheet" type="text/css" />
+<link href=".//productDetail.css?after" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
 <div class="product-container">
    <div class="page-header">
      <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
@@ -54,50 +53,74 @@
          <h4>${product.productExplain }</h4>
          <div class="product-sub-info">
             <h4>상품 세부 정보</h4>
+          	
+			<div id="productModal" class="productModal">
+				<form action="#" method="post">
+					<select name="size">
+						<option value="230">230</option>
+						<option value="240">240</option>
+						<option value="250">250</option>
+						<option value="260">260</option>
+						<option value="270">270</option>
+						<option value="280">280</option>
+					</select>
+					<button type="submit">submit</button>
+				</form>	
+			</div>
+			<%
+				if(request.getParameter("size") == null) {
+					%>
+					<span>사이즈를 선택하세요</span>
+					<%
+				}
+				else{
+					int size = Integer.parseInt(request.getParameter("size"));
+					
+					ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+		            
+		        	for(ProductDetail productDetail : product.getProductDetail()){
+		           
+		           		ProductDetail detail = productDetailDAO.selectById(conn, productDetail.getId());
+		         
+		            %>
+		            <c:set var="productDetail" value="<%= detail %>" />
+		            <%
+		            	if(size == detail.getSize()){
+		            		%>
+		    	            
+		    	            <div class="sub-div">
+		    	               <span>사이즈</span>
+		    	               <!-- productSize-->
+		    	               <span>${productDetail.size}</span>
+		    	            </div>
+		    	            <div class="sub-div">
+		    	               <span>상품 가격</span>
+		    	               <!-- productPrice-->
+		    	               <span>${productDetail.price}</span>
+		    	            </div>
+		    	            <div>
+		    	               <!-- onclick으로 진행하면 될듯 -->
+		    	               <button class="buyBtn" type="submit"><a class="purchaseBtn" href="../purchase/purchase.jsp?pdId=${productDetail.id}" >구매</a></button>
+		    	               <button class="interBtn" type="submit"><a class="interestBtn" href="../interest/interest.jsp?pdId=${productDetail.id}" >관심상품등록</a></button>
+		    	            </div>
+		    	            <% 
+
+		            		}   
+		            	}	
+				}
+			%>
             
-            <%
-            ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-         
-            for(ProductDetail productDetail : product.getProductDetail()){
-               
-               ProductDetail target = new ProductDetail();
-               
-                target = productDetailDAO.selectById(conn, productDetail.getId());
-                
-               %>
-               <c:set var="productDetail" value="<%= target %>" />
-               <div class="sub-div">
-                  <span>사이즈</span>
-                  <!-- productSize-->
-                  <span>${productDetail.size}</span>
-               </div>
-               <div class="sub-div">
-                  <span>상품 가격</span>
-                  <!-- productPrice-->
-                  <span>${productDetail.price}</span>
-               </div>
-               <div>
-                  <!-- onclick으로 진행하면 될듯 -->
-                  <button class="buyBtn" type="submit"><a class="purchaseBtn" href="../purchase/purchase.jsp?pdId=${productDetail.id}" >구매</a></button>
-                  <button class="interBtn" type="submit"><a class="interestBtn" href="../interest/interest.jsp?pdId=${productDetail.id}" >관심상품등록</a></button>
-               </div>
-               <% 
-               	break; 
-            }   
-         %>
             <hr width="600px" align="right" color= #d7d7d7 size="1px">
             <div class="sub-div">
                <!-- 출시일 정보 -->
                <span>출시일</span>
                <span>21/11/19</span>
             </div>
-            
             <div class="sub-div">
                <!-- productColor -->
                <span>컬러</span>
                <span>${product.productColor }</span>
             </div>
-         
          </div>
       </div>
    </div> 

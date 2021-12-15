@@ -12,7 +12,6 @@
 
 </head>
 <body>
-
 <%
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
@@ -24,18 +23,21 @@
 
 	ProductDAO productDAO = new ProductDAO();
 
-	List<Product> products = new ArrayList<Product>();
+	Page pages = new Page();
+	
+	List<Product> products = pages.getProducts();
 	
 	if(request.getParameter("servlet") == null) {
-	      products = productDAO.selectAllProducts(conn);   
-    }
-   	else if(request.getParameter("servlet").equals("search")){
-    	String target = request.getParameter("target");
-
-        products = productDAO.searchAllProducts(conn, target);
-   }
-	
-%>        
+		pages = productDAO.selectAllProductsIntoPage(conn, 1);  
+		
+		products = pages.getProducts();
+	}
+ 	else if(request.getParameter("servlet").equals("search")){
+  		String target = request.getParameter("target");
+		
+  		products = productDAO.searchAllProducts(conn, target);
+ 	}
+%>      
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript"></script>
@@ -134,6 +136,15 @@
 	      	if(session.getAttribute("LOGIN")!=null && session.getAttribute("LOGIN").equals("ADMIN")){
 	    			
 	    	}
+	      	else if(session.getAttribute("LOGIN") ==null ){
+	      		%>
+	      	      <tr>
+		              <td>
+		                  <a href="../user/signin.html" >구매하러가기</a>
+		              </td>
+		          </tr> 
+	      		<% 
+	      	}
 	      	else {
 	      		%>
 	      	      <tr>
@@ -147,6 +158,8 @@
          </table>                
       </c:forEach>
     </div>
+    <c:set var="page" value="<%=pages.getPageTotalCount()%>" />
+
   </div>
   
   <div class="page-footer">

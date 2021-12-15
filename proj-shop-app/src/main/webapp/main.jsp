@@ -24,26 +24,8 @@
 	
 	List<Product> products = new ArrayList<>();
 	
-	
 	if(request.getParameter("servlet") == null) {
-		PurchaseDAO purchaseDAO = new PurchaseDAO();
-		List<Integer> productDetailIds = purchaseDAO.selectTopByProductId(conn);
 		
-		ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-		ProductDAO productDAO = new ProductDAO();
-		
-		Product product = new Product();
-		
-		for(int productDetailId : productDetailIds){
-			int pId = productDetailDAO.getProductId(conn, productDetailId);
-			product = productDAO.selectById(conn, pId);
-			
-			products.add(product);
-			System.out.println(product.getId());
-		}
-		System.out.println(products);
-		
-
 	}
 	else if(request.getParameter("servlet").equals("signup")) {
 		User user = null;
@@ -110,7 +92,21 @@
 				</script>
 			<% 
 			}
-	    }   
+	    }
+	}
+	PurchaseDAO purchaseDAO = new PurchaseDAO();
+	List<Integer> productDetailIds = purchaseDAO.selectTopByProductId(conn);
+	
+	ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+	ProductDAO productDAO = new ProductDAO();
+	
+	Product product = new Product();
+	
+	for(int productDetailId : productDetailIds){
+		int pId = productDetailDAO.getProductId(conn, productDetailId);
+		product = productDAO.selectById(conn, pId);
+		
+		products.add(product);
 	}
 %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -146,7 +142,7 @@
                 	<input name="target" placeholder="Search your product..."/>
                     <button name="btn" type="submit">검색</button>
         		</form>
-      			 </div>
+      		 </div>
 		   </c:when>
 		   
 		   <c:when test="${!empty servlet}">
@@ -198,11 +194,20 @@
 		      	if(session.getAttribute("LOGIN")!=null && session.getAttribute("LOGIN").equals("ADMIN")){
 		    			
 		    	}
+		      	else if(session.getAttribute("LOGIN") ==null ){
+		      		%>
+		      	      <tr>
+			              <td>
+			                  <a href="./user/signin.html" >구매하러가기</a>
+			              </td>
+			          </tr> 
+		      		<% 
+		      	}
 		      	else {
 		      		%>
 		      	      <tr>
 			              <td>
-			                  <a href="productDetail.jsp?pId=${product.id}" >구매하러가기</a>
+			                  <a href="./product/productDetail.jsp?pId=${product.id}" >구매하러가기</a>
 			              </td>
 			          </tr> 
 		      		<% 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import model.Page;
 import model.Product;
 import model.ProductDetail;
 import util.JdbcUtil;
@@ -117,6 +118,97 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return product.getId();
+	}
+	
+	public int getPageTotalCount(Connection conn) {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		int pageTotalCount = 0;
+		
+		try {
+			pstmt = conn.prepareStatement
+			("select count(product_id) from product");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pageTotalCount = rs.getInt(1);
+				pageTotalCount = pageTotalCount/4 +1;
+			}
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return pageTotalCount;
+	}
+	
+	public Page selectAllProductsIntoPage(Connection conn, int pageNumber) throws SQLException {
+		PreparedStatement pstmt=null; 
+		ResultSet rs = null;
+		
+		Page page = new Page();
+		List<Product> products = new ArrayList<>();
+		Product product = null;
+		
+		int currentPageNumber = pageNumber;
+		int pageTotalCount = getPageTotalCount(conn);
+		
+		int cnt = 4;
+		int startIdx = (pageNumber-1)*cnt;
+		
+		try {
+			pstmt = conn.prepareStatement
+					("select * from product limit ?, ?");
+			pstmt.setInt(1, startIdx);
+			pstmt.setInt(2, cnt);
+			rs = pstmt.executeQuery();
+			
+			ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+			ProductDetail productDetail = null;
+			
+			List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
+			while(rs.next()) {
+				product = new Product();
+				product.setId(rs.getInt(1));
+				product.setProductName(rs.getString(2));
+				product.setProductExplain(rs.getString(3));
+				product.setProductColor(rs.getString(4));
+				
+				Blob blob = rs.getBlob(5);
+				
+				InputStream inputStream = blob.getBinaryStream();
+	            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				
+	            try {
+	            	byte[] buffer = new byte[4096];
+	                int bytesRead = -1;
+	                 
+	                while ((bytesRead = inputStream.read(buffer)) != -1) {
+	                    outputStream.write(buffer, 0, bytesRead);                  
+	                }
+	                byte[] imageBytes = outputStream.toByteArray();
+	                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+	                
+	                product.setBase64Image(base64Image);
+	            }
+	            catch(IOException ex) {
+	            	ex.printStackTrace();
+	            }
+	            
+				productDetails = productDetailDAO.selectAllById(conn, product.getId());
+				product.setProductDetail(productDetails);
+				
+				products.add(product);
+				
+				page.setCurrentPageNumber(pageNumber);
+				page.setPageTotalCount(pageTotalCount);
+				page.setProducts(products);
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return page;
 	}
 	
 	public List<Product> selectAllProducts(Connection conn) throws SQLException {
