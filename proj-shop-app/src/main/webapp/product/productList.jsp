@@ -9,49 +9,6 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link href=".//productList.css" rel="stylesheet" type="text/css">
-
-</head>
-<body>
-<%
-	Connection conn = null;
-	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
-	String id = "root";
-	String pwd = "0216"; 
-	
-	Class.forName("com.mysql.jdbc.Driver");
-	conn = DriverManager.getConnection(url, id, pwd);
-
-	ProductDAO productDAO = new ProductDAO();
-
-	Page pages = new Page();
-	
-	List<Product> products = pages.getProducts();
-	
-	if(request.getParameter("servlet") == null) {
-		pages = productDAO.selectAllProductsIntoPage(conn, 1);  
-		
-		products = pages.getProducts();
-	}
- 	else if(request.getParameter("servlet").equals("search")){
-  		String target = request.getParameter("target");
-		
-  		products = productDAO.searchAllProducts(conn, target);
- 	}
-%>      
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript"></script>
-<script>
-	function openCloseToc() {
-      if(document.getElementById('toc-content').style.display === 'block') {
-        document.getElementById('toc-content').style.display = 'none';
-        
-      } else {
-        document.getElementById('toc-content').style.display = 'block';
-        
-      }
-    }
-</script>
 <style>
 #toc-content {
 	display: none;
@@ -69,9 +26,75 @@
    justify-content: center;
    align-items: center;
 }
+.pageTable{
+	display: flex;
+	flex-direction: row;
+}
 </style>
+
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+	function openCloseToc() {
+      if(document.getElementById('toc-content').style.display === 'block') {
+        document.getElementById('toc-content').style.display = 'none';
+        
+      } else {
+        document.getElementById('toc-content').style.display = 'block'; 
+      }
+    }
+</script>
+<%
+	Connection conn = null;
+	String url = "jdbc:mysql://localhost:3306/web?serverTimezone=UTC";
+	String id = "root";
+	String pwd = "0216"; 
+	
+	Class.forName("com.mysql.jdbc.Driver");
+	conn = DriverManager.getConnection(url, id, pwd);
+
+	ProductDAO productDAO = new ProductDAO();
+
+	Page pages = new Page();
+	
+	List<Product> products = pages.getProducts();
+	
+	if(request.getParameter("pageNumber")==null) {
+		if(request.getParameter("servlet") == null) {
+			pages = productDAO.selectAllProductsIntoPage(conn, 1);  
+			
+			products = pages.getProducts();
+			
+			System.out.println(pages.getCurrentPageNumber());
+			System.out.println(pages.getPageTotalCount());
+		}
+	 	else if(request.getParameter("servlet").equals("search")){
+	  		String target = request.getParameter("target");
+			
+	  		products = productDAO.searchAllProducts(conn, target);
+	 	}	
+	}
+	else {
+		int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		if(request.getParameter("servlet") == null) {
+			pages = productDAO.selectAllProductsIntoPage(conn, pageNumber);  
+			
+			products = pages.getProducts();
+			
+			System.out.println(pages.getCurrentPageNumber());
+			System.out.println(pages.getPageTotalCount());
+		}
+	 	else if(request.getParameter("servlet").equals("search")){
+	  		String target = request.getParameter("target");
+			
+	  		products = productDAO.searchAllProducts(conn, target);
+	 	}
+	}
+	
+	
+%>      
 <div class="main-container">
-  
   <div class="page-header">
     <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
     <div class="menu">
@@ -104,7 +127,6 @@
 	   </c:choose>
     </div>
   </div>
-
   <div class="page-body">
   	<h1>Shop</h1>
   	<div class="product-list">
@@ -158,8 +180,25 @@
          </table>                
       </c:forEach>
     </div>
-    <c:set var="page" value="<%=pages.getPageTotalCount()%>" />
 
+	<div class="pageBtn">
+		<form action="" method="post">
+			<table class="pageTable">
+				<tr>
+				<%
+					for(int i=1; i<=pages.getPageTotalCount(); i++) {
+						%>
+						<td>
+			            	<button type="submit" name="pageNumber" value="<%=i%>"><%=i%></button>
+			            </td>
+						<%
+					}
+				%>
+				</tr>
+			</table>
+		</form>
+		
+	</div>
   </div>
   
   <div class="page-footer">
