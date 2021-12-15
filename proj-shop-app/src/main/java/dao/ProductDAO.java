@@ -234,7 +234,6 @@ public class ProductDAO {
 				product.setProductExplain(rs.getString(3));
 				product.setProductColor(rs.getString(4));
 				
-				/* product.setProductImage(rs.getBytes(5)); */
 				Blob blob = rs.getBlob(5);
 				
 				InputStream inputStream = blob.getBinaryStream();

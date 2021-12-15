@@ -111,9 +111,9 @@
                  <option value="토스">토스</option>
                  <option value="페이코">페이코</option>
               </select>
-                <div class = "buttonWrap">
-                   <button type="submit">결제하기</button>
-                </div>         
+              <div class = "buttonWrap">
+                 <button type="submit">결제하기</button>
+              </div>         
            </form>
         </div>
     </div>

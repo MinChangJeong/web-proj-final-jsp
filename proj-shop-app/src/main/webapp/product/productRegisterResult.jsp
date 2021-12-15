@@ -70,16 +70,17 @@
 		
 		productDetailDAO.insertProductDetail(conn, productDetail, pId);
 	}
+	%>
+	<script>
+		alert("상품 등록이 완료 되었습니다.");
+	</script>
+	<%
+		response.sendRedirect("productList.jsp");
+	%>
+	<%
 	
 %>
-<div>
-<script>
-	alert("상품 등록이 완료 되었습니다.");
-</script>
-<%
-response.sendRedirect(".//productList.jsp");
-%>
 
-</div>
+
 </body>
 </html>

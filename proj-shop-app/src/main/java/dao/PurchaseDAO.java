@@ -96,7 +96,6 @@ public class PurchaseDAO {
 		catch(SQLException ex) {
 			ex.printStackTrace();
 	    }
-		System.out.println(productDetailIds);
 		return productDetailIds;
 	}
 	

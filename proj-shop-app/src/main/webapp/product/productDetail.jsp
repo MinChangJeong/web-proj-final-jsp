@@ -37,7 +37,6 @@
       
       product = productDAO.selectById(conn, pId);
       
-      System.out.println(product);
    %>
    <div class="page-body">
    <c:set var="product" value="<%=product%>" />
@@ -86,6 +85,14 @@
 		            <c:set var="productDetail" value="<%= detail %>" />
 		            <%
 		            	if(size == detail.getSize()){
+		            		if(detail.getStock()==0) {
+		            			%>
+		            				<script>
+		            					alert("해당 제품은 품절 되었습니다.");
+		            					history(-1)
+		            				</script>
+		            			<%
+		            		}
 		            		%>
 		    	            
 		    	            <div class="sub-div">

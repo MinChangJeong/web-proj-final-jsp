@@ -80,7 +80,7 @@ public class ProductDetailDAO {
 				productDetail.setPrice(rs.getInt("price"));
 				productDetail.setStock(rs.getInt("stock"));
 				productDetail.setProduct_id(rs.getInt("pId"));
-		
+				productDetail.setCreatedAt(rs.getTimestamp("createdAt"));
 			}
 			
 		} catch (SQLException e){
@@ -110,7 +110,7 @@ public class ProductDetailDAO {
 				productDetail.setPrice(rs.getInt("price"));
 				productDetail.setStock(rs.getInt("stock"));
 				productDetail.setProduct_id(rs.getInt("pId"));
-				/* productDetail.setCreatedAt(rs.getDate(4)); */
+				productDetail.setCreatedAt(rs.getTimestamp("createdAt")); 
 				
 				productDetails.add(productDetail);
 			}
