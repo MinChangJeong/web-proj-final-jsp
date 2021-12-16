@@ -85,50 +85,92 @@
       		 	<span>배송지 주소 설정값 : ${user.address }</span>
       		</div>
 		</div>
-		<div class="user-purchase-list">
-		<%
-			PurchaseDAO purchaseDAO = new PurchaseDAO();
-			List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
-			%>
-			<h3>구매내역</h3>
-			<div class="purchase-header">
-				<span>전체 : <%= purchases.size() %> </span>
-				<span>배송준비중 : <%= purchases.size() %> </span>
-				<span>배송완료 : 0 </span>
-			</div>
-			<% 
-			ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-			ProductDAO productDAO = new ProductDAO();
-			
-			Product product = null;
-			ProductDetail productDetail = null;
-			for(Purchase purchase : purchases) {
-				productDetail = new ProductDetail();
-				productDetail = purchase.getProductDetail();
-				
-				product = new Product();
-				product = productDetail.getProduct();
-			
+		<div class="user-content">
+			<!-- purchase -->
+			<div class="user-purchase-list">
+			<%
+				PurchaseDAO purchaseDAO = new PurchaseDAO();
+				List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
 				%>
-				<c:set var="purchase" value="<%= purchase %>"/>
-				<c:set var="product" value="<%= product %>"/>
-				<c:set var="productDetail" value="<%= productDetail %>"/>
-				
-				<div class="purchase-body">
-					<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
-					<div class="purchase-detail">
-						<span>상품명 : ${product.productName}</span>
-						<span>상품 상세 정보 : ${product.productExplain }</span>
-						<span>총 주문 가격 : ${purchase.totalPurchasePrice }</span>
-						<span>결제 수단 : ${purchase.paymentMethod} </span>
-						<span>결제 일시 : ${purchase.createdAt }</span>
-					</div>
+				<h3>구매내역</h3>
+				<div class="purchase-header">
+					<span>전체 : <%= purchases.size() %> </span>
+					<span>배송준비중 : <%= purchases.size() %> </span>
+					<span>배송완료 : 0 </span>
 				</div>
-					
 				<% 
-			}
-		%>
+				ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+				ProductDAO productDAO = new ProductDAO();
+				
+				Product product = null;
+				ProductDetail productDetail = null;
+				for(Purchase purchase : purchases) {
+					productDetail = new ProductDetail();
+					productDetail = purchase.getProductDetail();
+					
+					product = new Product();
+					product = productDetail.getProduct();
+				
+					%>
+					<c:set var="purchase" value="<%= purchase %>"/>
+					<c:set var="product" value="<%= product %>"/>
+					<c:set var="productDetail" value="<%= productDetail %>"/>
+					
+					<div class="purchase-body">
+						<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
+						<div class="purchase-detail">
+							<span>상품명 : ${product.productName}</span>
+							<span>상품 상세 정보 : ${product.productExplain }</span>
+							<span>총 주문 가격 : ${purchase.totalPurchasePrice }</span>
+							<span>결제 수단 : ${purchase.paymentMethod} </span>
+							<span>결제 일시 : ${purchase.createdAt }</span>
+						</div>
+					</div>
+						
+					<% 
+				}
+			%>
+			</div>
+			
+			<!-- interest -->
+			<div class="user-interest-list">
+			<%
+				InterestDAO interestDAO = new InterestDAO();
+				List<Interest> interests = interestDAO.selectAllInterestByIds(conn, user.getId());
+				%>
+				<h3>관심상품</h3>
+				<div class="interest-header">
+					<span>전체 : <%= interests.size() %> </span>
+				</div>
+				<% 
+				
+				for(Interest interest : interests) {
+					productDetail = new ProductDetail();
+					productDetail = interest.getProductDetail();
+					
+					product = new Product();
+					product = productDetail.getProduct();
+				
+					%>
+					<c:set var="interest" value="<%= interest %>"/>
+					<c:set var="product" value="<%= product %>"/>
+					<c:set var="productDetail" value="<%= productDetail %>"/>
+					
+					<div class="interest-body">
+						<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
+						<div class="interest-detail">
+							<span>상품명 : ${product.productName}</span>
+							<span>상품 상세 정보 : ${product.productExplain }</span>
+						</div>
+					</div>
+						
+					<% 
+				}
+			%>
+			</div>
+			
 		</div>
+		
 	</div>
 	
 	<div class="page-footer">

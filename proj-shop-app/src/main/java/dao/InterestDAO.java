@@ -28,4 +28,48 @@ public class InterestDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public List<Interest> selectAllInterestByIds(Connection conn, int uId) 
+	         throws SQLException {
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      
+	      List<Interest> interests = new ArrayList<>();
+	      Interest interest = null;
+	      try {
+	         pstmt = conn.prepareStatement("select * from interest where uId = ?");
+	         pstmt.setInt(1, uId);
+	         
+	         rs = pstmt.executeQuery();
+	        
+	         
+	         ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+	         ProductDetail productDetail = null;
+	         ProductDAO productDAO = new ProductDAO();
+	         Product product = null;
+	         
+	         while(rs.next()) { 
+	        	interest = new Interest();
+	        	interest.setId(rs.getInt("interest_id"));
+	            interest.setCreatedAt(rs.getTimestamp("createdAt"));
+	          
+	            productDetail = new ProductDetail();
+	            int pdId = rs.getInt("pId");
+	            
+	            productDetail = productDetailDAO.selectById(conn, pdId);
+	            interest.setProductDetail(productDetail);
+	            
+	            product = new Product();
+	            product = productDAO.selectById(conn, productDetail.getProduct_id());
+	            productDetail.setProduct(product);
+	            
+	            interests.add(interest);
+	         }
+	         
+	      }
+	      catch(SQLException ex) {
+	         ex.printStackTrace();
+	       }
+	      return interests;
+	   }
 }

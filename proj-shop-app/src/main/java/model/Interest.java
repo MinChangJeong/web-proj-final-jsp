@@ -7,6 +7,8 @@ public class Interest {
 
 	private Date createdAt;
 	
+	private ProductDetail productDetail;
+	
 	public Interest() {}
 	
 	public int getId() {
@@ -23,6 +25,14 @@ public class Interest {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public ProductDetail getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(ProductDetail productDetail) {
+		this.productDetail = productDetail;
 	}
 	
 	

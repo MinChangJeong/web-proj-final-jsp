@@ -28,7 +28,7 @@
 	
 	User user = null;
 	
-	user = userDAO.selectByEmail(conn, email);
+	user = userDAO.selectInfoByEmail(conn, email);
 	int uId = user.getId();
 			
 	InterestDAO interestDAO = new InterestDAO();
