@@ -80,6 +80,7 @@ public class UserDAO {
 	         if (rs.next()){
 	            user = new User();
 	            user.setId(rs.getInt("user_id"));
+	            user.setUsername(rs.getString("username"));
 	            user.setEmail(rs.getString("email"));
 	            user.setPassword(rs.getString("password"));
 	            user.setAddress(rs.getString("address"));

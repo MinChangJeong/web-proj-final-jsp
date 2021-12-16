@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="main.css" rel="stylesheet" type="text/css" />
+<link href=".//main.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>main</title>
 </head>
@@ -147,9 +147,8 @@
 		   <c:when test="${!empty servlet}">
 		      <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 		      <a href="user/logout.jsp"><img src="images/logout.png" alt="" /></a>
-		      
-		      <!-- <a href="user/userInfo.jsp" >info</a>  -->
-	
+		      <a href="user/userInfo.jsp"><img class="mypage" src="images/mypage.png" alt="" /></a>
+		  
 		      <div id="toc-content">
         		<form action="product/productList.jsp?servlet=search" method="post">
                 	<input class="target" name="target" placeholder="Search your product..."/>
@@ -222,11 +221,13 @@
   	</div>
   </div>
   
- <div class="page-footer">
-    <img src="images/banner1.jpg" alt="" />
-    <img src="images/banner2.jpg" alt="" />
-  </div>
-  <img src="images/banner3.png" alt="img" />
+<div class="page-footer">
+    <div class="bottom-banner">
+    	<img src="images/banner1.jpg" alt="" />
+    	<img src="images/banner2.jpg" alt="" />
+    </div>
+    <img class="bottom-info-img" src="images/banner3.png" alt="img" />
+</div>
 </div>
 </body>
 </html>

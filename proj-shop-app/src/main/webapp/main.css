@@ -16,8 +16,13 @@
 .page-footer {
    width:100%;
    display: flex;
+   flex-direction: column;     
+}
+.bottom-banner {
+   width:100%;
+   display: flex;
    flex-direction: row;      
-   margin-top: 200px;
+   margin-top: 100px;
 }
 .page-footer img {
    width: 100%;
@@ -89,4 +94,13 @@ a:active {
 	border-bottom: 1px solid black;
 	height: 20px;
 	width: 200px;
+}
+.mypage{
+   width: 70px;
+   height: 22px;
+   margin-bottom: 5px;
+   
+}
+a {
+  text-decoration-line: none;
 }

@@ -114,6 +114,8 @@
 		   <c:when test="${!empty servlet}">
 		      <a href="../product/productList.jsp"><img src="../images/shop.png" alt="" /></a>
 		      <a href="../user/logout.jsp"><img src="../images/logout.png" alt="" /></a>
+		      <a href="../user/userInfo.jsp"><img class="mypage" src="../images/mypage.png" alt="" /></a>
+		      
 		      <div id="toc-content">
         		<form action="productList.jsp?servlet=search" method="post">
                 	<input class="target" name="target" placeholder="Search your product..."/>
