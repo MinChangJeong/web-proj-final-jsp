@@ -31,9 +31,6 @@ public class UserDAO {
 			
 		} catch (SQLException e){
 			e.printStackTrace();
-		} finally {
-			JdbcUtil.close(conn);
-			JdbcUtil.close(pstmt);
 		}
 	}
 	

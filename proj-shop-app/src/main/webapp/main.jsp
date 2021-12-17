@@ -35,15 +35,38 @@
 		String phoneNumber = request.getParameter("phoneNumber");
 		int shoesSize = Integer.parseInt(request.getParameter("shoesSize"));
 		String address = request.getParameter("address");
-	
-		user = new User(username, email, password, phoneNumber, address, shoesSize);
 		
-	 	try {
-			UserDAO userDao= new UserDAO();
-			userDao.insertUser(conn, user);
+		boolean emailCheck = false;
+		UserDAO userDao= new UserDAO();	
+		try {  
+			emailCheck = userDao.checkEmail(conn, email);
 			
-			session.setAttribute("LOGIN", email);
+			if (emailCheck) {
+				%>
+					<script>
+					   alert("이미 존재하는 아이디 입니다.");
+					   history.go(-1);
+					</script>
+				<% 
+		    }
+			else {
+				user = new User(username, email, password, phoneNumber, address, shoesSize);	
+				
+				try {
+					userDao.insertUser(conn, user);
+					
+					session.setAttribute("LOGIN", email);
+					%>
+						<script type="text/javascript">
+							alert("회원가입이 완료되었습니다.");
+							window.location.href = 'http://localhost:8080/proj-shop-app/user/signin.html';
+						</script>
+					<%
+				}catch (SQLException e){} 
+			}
 		}catch (SQLException e){} 
+		
+	 	
 	}
 	else if(request.getParameter("servlet").equals("login")){
 		
@@ -147,7 +170,7 @@
 		   <c:when test="${!empty servlet}">
 		      <a href="product/productList.jsp"><img src="images/shop.png" alt="" /></a>
 		      <a href="user/logout.jsp"><img src="images/logout.png" alt="" /></a>
-		      <a href="user/userInfo.jsp"><img class="mypage" src="images/mypage.png" alt="" /></a>
+		      <a href="./user/userPurchaseInfo.jsp"><img class="mypage" src="images/mypage.png" alt="" /></a>
 		  
 		      <div id="toc-content">
         		<form action="product/productList.jsp?servlet=search" method="post">

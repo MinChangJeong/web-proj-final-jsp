@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="userInfo.css" rel="stylesheet" type="text/css" />
+<link href=".//userPurchaseInfo.css" rel="stylesheet" type="text/css" />
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
@@ -40,8 +40,8 @@
 		   <c:choose>
 			   <c:when test="${empty servlet}">
 		         <a href="../product/productList.jsp"><img src="../images/shop.png" alt="" /></a>
-		         <a href="signin.html"><img src="../images/login.png" alt="img" /></a>
-		         <a href="signup.html"><img src="../images/join.png" alt="img" /></a>
+		         <a href="../signin.html"><img src="../images/login.png" alt="img" /></a>
+		         <a href="../signup.html"><img src="../images/join.png" alt="img" /></a>
 		      	 <div id="toc-content">
 	        		<form action="product/productList.jsp?servlet=search" method="post">
 	                	<input class="target" name="target" placeholder="Search your product..."/>
@@ -67,8 +67,21 @@
 		   </c:choose>
 	    </div>
 	</div>
-	
+	</div>
+	<div class="page">
+	<div class="leftmenu-container">
+		<div class="leftmenu">
+	   		<h3>MY PAGE NEMU</h3>
+	        <ul>
+				<li><a href="../user/userPurchaseInfo.jsp">구매내역</a></li>
+				<li><a href="../user/userInterestInfo.jsp">관심상품</a></li>
+	       </ul>
+	    </div>
+	    <div class="line"></div>
+	</div>
 	<div class="page-body">
+	
+		<div class="user-content">
 		<div class="user-info">
 		<%
 		    String email = String.valueOf(session.getAttribute("LOGIN"));
@@ -85,94 +98,86 @@
       		 	<span>배송지 주소 설정값 : ${user.address }</span>
       		</div>
 		</div>
-		<div class="user-content">
 			<!-- purchase -->
-			<div class="user-purchase-list">
-			<%
-				PurchaseDAO purchaseDAO = new PurchaseDAO();
-				List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
-				%>
-				<h3>구매내역</h3>
-				<div class="purchase-header">
-					<span>전체 : <%= purchases.size() %> </span>
-					<span>배송준비중 : <%= purchases.size() %> </span>
-					<span>배송완료 : 0 </span>
-				</div>
-				<% 
-				ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-				ProductDAO productDAO = new ProductDAO();
-				
-				Product product = null;
-				ProductDetail productDetail = null;
-				for(Purchase purchase : purchases) {
-					productDetail = new ProductDetail();
-					productDetail = purchase.getProductDetail();
-					
-					product = new Product();
-					product = productDetail.getProduct();
-				
+			<div class="purchase-wrap">
+				<div class="user-purchase-list">
+				<%
+					PurchaseDAO purchaseDAO = new PurchaseDAO();
+					List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
 					%>
-					<c:set var="purchase" value="<%= purchase %>"/>
-					<c:set var="product" value="<%= product %>"/>
-					<c:set var="productDetail" value="<%= productDetail %>"/>
-					
-					<div class="purchase-body">
-						<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
-						<div class="purchase-detail">
-							<span>상품명 : ${product.productName}</span>
-							<span>상품 상세 정보 : ${product.productExplain }</span>
-							<span>총 주문 가격 : ${purchase.totalPurchasePrice }</span>
-							<span>결제 수단 : ${purchase.paymentMethod} </span>
-							<span>결제 일시 : ${purchase.createdAt }</span>
-						</div>
+					<h3>구매내역</h3>
+					<div class="purchase-header">
+						<span>전체 &nbsp &nbsp &nbsp<%= purchases.size() %></span>
+						<div class="line1"></div>
+						<span>배송준비중 &nbsp &nbsp &nbsp &nbsp<%= purchases.size() %> </span>
+						<div class="line1"></div>
+						<span>배송완료 &nbsp &nbsp &nbsp 0 &nbsp &nbsp</span>
 					</div>
-						
 					<% 
-				}
-			%>
+					ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+					ProductDAO productDAO = new ProductDAO();
+					
+					Product product = null;
+					ProductDetail productDetail = null;
+					for(Purchase purchase : purchases) {
+						productDetail = new ProductDetail();
+						productDetail = purchase.getProductDetail();
+						
+						product = new Product();
+						product = productDetail.getProduct();
+					
+						%>
+						<c:set var="purchase" value="<%= purchase %>"/>
+						<c:set var="product" value="<%= product %>"/>
+						<c:set var="productDetail" value="<%= productDetail %>"/>
+						
+						<div class="purchase-body">
+							<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
+							<div class="purchase-detail">
+								<span>상품명 : ${product.productName}</span>
+								<span>상품 상세 정보 : ${product.productExplain }</span>
+								<span>총 주문 가격 : ${purchase.totalPurchasePrice }</span>
+								<span>결제 수단 : ${purchase.paymentMethod} </span>
+								<span>결제 일시 : ${purchase.createdAt }</span>
+							</div>
+						</div>
+							
+						<% 
+					}
+				%>
+				</div>
 			</div>
 			
-			<!-- interest -->
-			<div class="user-interest-list">
-			<%
-				InterestDAO interestDAO = new InterestDAO();
-				List<Interest> interests = interestDAO.selectAllInterestByIds(conn, user.getId());
-				%>
-				<h3>관심상품</h3>
-				<div class="interest-header">
-					<span>전체 : <%= interests.size() %> </span>
-				</div>
-				<% 
-				
-				for(Interest interest : interests) {
-					productDetail = new ProductDetail();
-					productDetail = interest.getProductDetail();
-					
-					product = new Product();
-					product = productDetail.getProduct();
-				
+		
+				<%
+					InterestDAO interestDAO = new InterestDAO();
+					List<Interest> interests = interestDAO.selectAllInterestByIds(conn, user.getId());
 					%>
-					<c:set var="interest" value="<%= interest %>"/>
-					<c:set var="product" value="<%= product %>"/>
-					<c:set var="productDetail" value="<%= productDetail %>"/>
 					
-					<div class="interest-body">
-						<img class="productImage" alt="img" src="data:image/png;base64,${product.base64Image}" />
-						<div class="interest-detail">
-							<span>상품명 : ${product.productName}</span>
-							<span>상품 상세 정보 : ${product.productExplain }</span>
-						</div>
-					</div>
-						
 					<% 
-				}
-			%>
-			</div>
-			
-		</div>
+				
+					for(Interest interest : interests) {
+						productDetail = new ProductDetail();
+						productDetail = interest.getProductDetail();
+					
+						product = new Product();
+						product = productDetail.getProduct();
+				
+						%>
+						<c:set var="interest" value="<%= interest %>"/>
+						<c:set var="product" value="<%= product %>"/>
+						<c:set var="productDetail" value="<%= productDetail %>"/>
+					
+						
+						<% 
+					}
+				%>
+
+
 		
 	</div>
-	
+	</div>
+	</div>
 	<div class="page-footer">
 	    <div class="bottom-banner">
 	    	<img src="../images/banner1.jpg" alt="" />
@@ -180,6 +185,6 @@
 	    </div>
 	    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
 	</div>
-</div>
+
 </body>
 </html>
