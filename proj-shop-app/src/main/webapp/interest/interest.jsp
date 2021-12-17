@@ -33,12 +33,19 @@
 			
 	InterestDAO interestDAO = new InterestDAO();
 	interestDAO.insertInterest(conn, uId, pdId);
-	
+	%>
+		<script type="text/javascript">	
+			var check = confirm("관심상품 등록을 확인하시겠습니까?");
+		   	  if(check) {
+		   		window.location.href = 'http://localhost:8080/proj-shop-app/user/userInterestInfo.jsp';
+		   	  }
+		   	  else {
+		   		history.go(-1);
+		   	  }
+		</script>
+	<%	
 %>
 
-<script type="text/javascript">
-	alert("관심상품으로 등록 되었습니다.");
-	history.go(-1);
-</script>
+
 </body>
 </html>

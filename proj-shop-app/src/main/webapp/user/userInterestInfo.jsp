@@ -67,8 +67,8 @@
 		   </c:choose>
 	    </div>
 	</div>
-	</div>
-	<div class="page">
+</div>
+<div class="page">
 	<div class="leftmenu-container">
 		<div class="leftmenu">
 	   		<h3>MY PAGE NEMU</h3>
@@ -80,52 +80,51 @@
 	    <div class="line"></div>
 	</div>
 	<div class="page-body">
-	
 		<div class="user-content">
-		<div class="user-info">
-		<%
-		    String email = String.valueOf(session.getAttribute("LOGIN"));
-		    UserDAO userDAO = new UserDAO();
-		   
-		    User user = userDAO.selectInfoByEmail(conn, email);		
-		%>
-		<c:set var="user" value="<%= user %>"/>
-			<img class="user-img" alt="" src="../images/userImage.png">
-			<div class="user-main-info">
-      		 	<h3>${user.username }</h3>
-      		 	<span>이메일 : ${user.email }</span>
-      		 	<span>전화번호 : ${user.phoneNumber }</span>
-      		 	<span>배송지 주소 설정값 : ${user.address }</span>
-      		</div>
-		</div>
+			<div class="user-info">
+			<%
+			    String email = String.valueOf(session.getAttribute("LOGIN"));
+			    UserDAO userDAO = new UserDAO();
+			   
+			    User user = userDAO.selectInfoByEmail(conn, email);		
+			%>
+			<c:set var="user" value="<%= user %>"/>
+				<img class="user-img" alt="" src="../images/userImage.png">
+				<div class="user-main-info">
+	      		 	<h3>${user.username }</h3>
+	      		 	<span>이메일 : ${user.email }</span>
+	      		 	<span>전화번호 : ${user.phoneNumber }</span>
+	      		 	<span>배송지 주소 설정값 : ${user.address }</span>
+	      		</div>
+			</div>
 		
-				<%
-					PurchaseDAO purchaseDAO = new PurchaseDAO();
-					List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
-					%>
-					
-					<% 
-					ProductDetailDAO productDetailDAO = new ProductDetailDAO();
-					ProductDAO productDAO = new ProductDAO();
-					
-					Product product = null;
-					ProductDetail productDetail = null;
-					for(Purchase purchase : purchases) {
-						productDetail = new ProductDetail();
-						productDetail = purchase.getProductDetail();
-						
-						product = new Product();
-						product = productDetail.getProduct();
-					
-						%>
-						<c:set var="purchase" value="<%= purchase %>"/>
-						<c:set var="product" value="<%= product %>"/>
-						<c:set var="productDetail" value="<%= productDetail %>"/>
-						
-							
-						<% 
-					}
+			<%
+				PurchaseDAO purchaseDAO = new PurchaseDAO();
+				List<Purchase> purchases = purchaseDAO.selectAllPurchaseByIds(conn, user.getId());
 				%>
+				
+				<% 
+				ProductDetailDAO productDetailDAO = new ProductDetailDAO();
+				ProductDAO productDAO = new ProductDAO();
+				
+				Product product = null;
+				ProductDetail productDetail = null;
+				for(Purchase purchase : purchases) {
+					productDetail = new ProductDetail();
+					productDetail = purchase.getProductDetail();
+					
+					product = new Product();
+					product = productDetail.getProduct();
+				
+					%>
+					<c:set var="purchase" value="<%= purchase %>"/>
+					<c:set var="product" value="<%= product %>"/>
+					<c:set var="productDetail" value="<%= productDetail %>"/>
+					
+						
+					<% 
+				}
+			%>
 
 			
 			<!-- interest -->
@@ -158,22 +157,24 @@
 							</div>
 						</div>
 						
+						<%
+							/* delete interest 부분 */
+						%>
+						
 						<% 
-					}
-				%>
+						}
+					%>
+				</div>
 			</div>
 		</div>
-		
 	</div>
-	</div>
-	</div>
-	<div class="page-footer">
-	    <div class="bottom-banner">
-	    	<img src="../images/banner1.jpg" alt="" />
-	    	<img src="../images/banner2.jpg" alt="" />
-	    </div>
-	    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
-	</div>
-
+</div>
+<div class="page-footer">
+    <div class="bottom-banner">
+    	<img src="../images/banner1.jpg" alt="" />
+    	<img src="../images/banner2.jpg" alt="" />
+    </div>
+    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
+</div>
 </body>
 </html>

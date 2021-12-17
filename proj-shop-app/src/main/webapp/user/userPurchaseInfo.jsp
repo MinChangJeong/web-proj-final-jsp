@@ -67,8 +67,8 @@
 		   </c:choose>
 	    </div>
 	</div>
-	</div>
-	<div class="page">
+</div>
+<div class="page">
 	<div class="leftmenu-container">
 		<div class="leftmenu">
 	   		<h3>MY PAGE NEMU</h3>
@@ -80,24 +80,23 @@
 	    <div class="line"></div>
 	</div>
 	<div class="page-body">
-	
 		<div class="user-content">
-		<div class="user-info">
-		<%
-		    String email = String.valueOf(session.getAttribute("LOGIN"));
-		    UserDAO userDAO = new UserDAO();
-		   
-		    User user = userDAO.selectInfoByEmail(conn, email);		
-		%>
-		<c:set var="user" value="<%= user %>"/>
-			<img class="user-img" alt="" src="../images/userImage.png">
-			<div class="user-main-info">
-      		 	<h3>${user.username }</h3>
-      		 	<span>이메일 : ${user.email }</span>
-      		 	<span>전화번호 : ${user.phoneNumber }</span>
-      		 	<span>배송지 주소 설정값 : ${user.address }</span>
-      		</div>
-		</div>
+			<div class="user-info">
+			<%
+			    String email = String.valueOf(session.getAttribute("LOGIN"));
+			    UserDAO userDAO = new UserDAO();
+			   
+			    User user = userDAO.selectInfoByEmail(conn, email);		
+			%>
+			<c:set var="user" value="<%= user %>"/>
+				<img class="user-img" alt="" src="../images/userImage.png">
+				<div class="user-main-info">
+	      		 	<h3>${user.username }</h3>
+	      		 	<span>이메일 : ${user.email }</span>
+	      		 	<span>전화번호 : ${user.phoneNumber }</span>
+	      		 	<span>배송지 주소 설정값 : ${user.address }</span>
+	      		</div>
+			</div>
 			<!-- purchase -->
 			<div class="purchase-wrap">
 				<div class="user-purchase-list">
@@ -147,44 +146,39 @@
 				%>
 				</div>
 			</div>
+			<%
+				InterestDAO interestDAO = new InterestDAO();
+				List<Interest> interests = interestDAO.selectAllInterestByIds(conn, user.getId());
+				%>
+				
+				<% 
 			
-		
-				<%
-					InterestDAO interestDAO = new InterestDAO();
-					List<Interest> interests = interestDAO.selectAllInterestByIds(conn, user.getId());
+				for(Interest interest : interests) {
+					productDetail = new ProductDetail();
+					productDetail = interest.getProductDetail();
+				
+					product = new Product();
+					product = productDetail.getProduct();
+			
 					%>
+					<c:set var="interest" value="<%= interest %>"/>
+					<c:set var="product" value="<%= product %>"/>
+					<c:set var="productDetail" value="<%= productDetail %>"/>
+				
 					
 					<% 
-				
-					for(Interest interest : interests) {
-						productDetail = new ProductDetail();
-						productDetail = interest.getProductDetail();
-					
-						product = new Product();
-						product = productDetail.getProduct();
-				
-						%>
-						<c:set var="interest" value="<%= interest %>"/>
-						<c:set var="product" value="<%= product %>"/>
-						<c:set var="productDetail" value="<%= productDetail %>"/>
-					
-						
-						<% 
-					}
-				%>
-
-
-		
+				}
+			%>
+		</div>
 	</div>
-	</div>
-	</div>
-	<div class="page-footer">
-	    <div class="bottom-banner">
-	    	<img src="../images/banner1.jpg" alt="" />
-	    	<img src="../images/banner2.jpg" alt="" />
-	    </div>
-	    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
-	</div>
+</div>
+<div class="page-footer">
+    <div class="bottom-banner">
+    	<img src="../images/banner1.jpg" alt="" />
+    	<img src="../images/banner2.jpg" alt="" />
+    </div>
+    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
+</div>
 
 </body>
 </html>
