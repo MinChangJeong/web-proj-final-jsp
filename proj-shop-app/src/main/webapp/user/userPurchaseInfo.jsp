@@ -54,7 +54,7 @@
 			   <c:when test="${!empty servlet}">
 			      <a href="../product/productList.jsp"><img src="../images/shop.png" alt="" /></a>
 			      <a href="logout.jsp"><img src="../images/logout.png" alt="" /></a>
-			      <a href="userInfo.jsp"><img class="mypage" src="../images/mypage.png" alt="" /></a>
+			      <a href="userPurchaseInfo.jsp"><img class="mypage" src="../images/mypage.png" alt="" /></a>
 			  
 			      <div id="toc-content">
 	        		<form action="../product/productList.jsp?servlet=search" method="post">

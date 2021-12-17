@@ -35,27 +35,22 @@
 	PurchaseDAO purchaseDAO = new PurchaseDAO();
 	
 	String userEmail = String.valueOf(session.getAttribute("LOGIN"));
-	System.out.println(userEmail);
-	
 	User user = new User();
 
 	UserDAO userDAO = new UserDAO();
 	user = userDAO.selectInfoByEmail(conn, userEmail);
-	
-	System.out.println(user.getId());
 	
 	Purchase purchase = new Purchase();
 	purchase.setPaymentMethod(paymentMethod);
 	purchase.setTotalPurchasePrice(totalPurchasePrice);
 
 	purchaseDAO.insertPurchase(conn, user.getId(), pdId, purchase);
+	%>
+		<script>
+			alert("상품 구매가 완료 되었습니다.");
+			window.location.href = 'http://localhost:8080/proj-shop-app/user/userPurchaseInfo.jsp';
+		</script>
+	<% 
 %>
 </body>
-<script>
-	alert("상품 구매가 완료 되었습니다.");
-	<%
-		response.sendRedirect("..//product/productList.jsp");
-	%>
-</script>
-
 </html>
