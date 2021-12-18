@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.jdbc.JdbcConnection;
+
 import model.*;
+import util.JdbcUtil;
 
 public class InterestDAO {
 	public void insertInterest(Connection conn, int uId, int pdId) throws SQLException {
@@ -72,4 +75,21 @@ public class InterestDAO {
 	       }
 	      return interests;
 	   }
+	
+	public void deleteInterest(Connection conn, int interest_id)  
+			throws SQLException {
+	    PreparedStatement pstmt=null; 		
+  		try {
+  			pstmt = conn.prepareStatement
+  			("delete from interest where interest_id = ?");
+  			pstmt.setInt(1, interest_id);
+  			pstmt.executeUpdate();			
+  		} catch (SQLException e){
+  			e.printStackTrace();
+  		} finally {
+  			JdbcUtil.close(conn);
+  			JdbcUtil.close(pstmt);
+  		}     
+	}
+	
 }

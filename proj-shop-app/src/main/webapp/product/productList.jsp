@@ -93,7 +93,7 @@
 <div class="main-container">
   <div class="page-header">
 
-   <a href="main.jsp"><img src="images/logo1.png" alt="" /></a>
+   <a href="../main.jsp"><img src="../images/logo1.png" alt="" /></a>
    <div class="menu">
 	   <c:set var ="servlet" value="<%=session.getAttribute(\"LOGIN\")%>"/>
 	   <c:choose>
@@ -202,9 +202,12 @@
   </div>
   
   <div class="page-footer">
-      <img src="../images/banner1.jpg" alt="img" />
-      <img src="../images/banner2.jpg" alt="img" />
-  </div>
+    <div class="bottom-banner">
+    	<img src="../images/banner1.jpg" alt="" />
+    	<img src="../images/banner2.jpg" alt="" />
+    </div>
+    <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
+</div>
 </div>
 
 </body>

@@ -154,11 +154,15 @@
 							<div class="interest-detail">
 								<span>상품명 : ${product.productName}</span>
 								<span>상품 상세 정보 : ${product.productExplain }</span>
+								<span>사이즈 : ${productDetail.size }</span>
+								<span>가격 : ${productDetail.price }</span>
 							</div>
+							<button><a href="../product/productDetail.jsp?pId=${product.id}&&pdId=${productDetail.id}" >바로구매</a></button>
+							<button><a class="interestBtn" href="../interest/deleteInterest.jsp?interest_id=${interest.id}" >삭제</a></button>
 						</div>
 						
 						<%
-							/* delete interest 부분 */
+							
 						%>
 						
 						<% 
