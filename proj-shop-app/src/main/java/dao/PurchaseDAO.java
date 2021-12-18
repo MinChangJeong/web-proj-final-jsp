@@ -58,7 +58,8 @@ public class PurchaseDAO {
         	purchase.setId(rs.getInt("purchase_id"));
             purchase.setTotalPurchasePrice(rs.getInt("totalPurchasePrice"));
             purchase.setPaymentMethod(rs.getString("paymentMethod"));
-            purchase.setCreatedAt(rs.getTimestamp("createdAt"));
+			/* purchase.setCreatedAt(rs.getTimestamp("createdAt")); */
+            purchase.setCreatedAt(rs.getDate("createdAt"));
           
             productDetail = new ProductDetail();
             int pdId = rs.getInt("pId");
@@ -97,7 +98,6 @@ public class PurchaseDAO {
       catch(SQLException ex) {
          ex.printStackTrace();
        }
-      System.out.println(productDetailIds);
       return productDetailIds;
    }
    
