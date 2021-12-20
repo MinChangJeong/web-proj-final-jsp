@@ -57,7 +57,7 @@
 		         <h4>${product.productExplain }</h4>
 		         <div class="product-sub-info">
 		            <h4>상품 세부 정보</h4>
-					
+					<hr width="600px" align="right" color= #d7d7d7 size="1px">
 					<%						
 						ProductDetailDAO productDetailDAO = new ProductDetailDAO();
 			            
@@ -127,8 +127,10 @@
 		         <h4>${product.productExplain }</h4>
 		         <div class="product-sub-info">
 		            <h4>상품 세부 정보</h4>
-		          	
+		          	<hr width="600px" align="right" color= #d7d7d7 size="1px">
 					<div id="productModal" class="productModal">
+						<span>사이즈를 선택하세요</span>
+						
 						<form action="#" method="post">
 							<select name="size">
 								<option value="230">230</option>
@@ -141,11 +143,10 @@
 							<button type="submit">submit</button>
 						</form>	
 					</div>
+					
 					<%
 						if(request.getParameter("size") == null) {
-							%>
-							<span>사이즈를 선택하세요</span>
-							<%
+							
 						}
 						else{
 							int size = Integer.parseInt(request.getParameter("size"));

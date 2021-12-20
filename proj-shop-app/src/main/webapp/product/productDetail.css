@@ -60,7 +60,7 @@
 }
 
 .product-detail div span{
-   font-size: 15pt;
+   fontsize: 15pt;
 }
 
 .buyBtn {
@@ -103,19 +103,6 @@
    margin-bottom: 5px;
 }
 
-.purchaseBtn:link {
-   color: white;
-}
-.purchaseBtn:visited { 
-   color:white; 
-}
-.purchaseBtn:hover {
-   color: black;
-}
-.purchaseBtn:active {
-   color: black;
-}
-
 .interestBtn:link {
    color: white;
 }
@@ -128,7 +115,18 @@
 .interestBtn:active {
    color: black;
 }
-
+.purchaseBtn:link {
+   color: white;
+}
+.purchaseBtn:visited { 
+   color:white; 
+}
+.purchaseBtn:hover {
+   color: black;
+}
+.purchaseBtn:active {
+   color: black;
+}
 .line {
     border: 0.01px solid #d7d7d7;
     width: 0.01px;
@@ -136,19 +134,33 @@
     background-color: #d7d7d7;
 }
 
-a:link {
-   color: black;
+select {
+   border-left: none;
+   border-right: none;
+   border-top: none;
+   width: 80px;
+   height: 30px;
+   font-size: 17px; 
+   text-align-last: center;
+   
 }
-a:visit {
-   color: black;
-}
-a:hover {
-   color: gray;
-}
-a:active {
-   color: gray;
+.productModal {
+   display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    width: 600px;
 }
 a {
-  text-decoration-line: none;
+   text-decoration-line : none;
 }
-
+.productModal button{
+   margin-left: 5px;
+   border-radius: 5px 5px 5px 5px;
+   border: none;
+   width: 50px;
+   height: 30px;
+   background-color: #000;
+   color: white;   
+   
+}

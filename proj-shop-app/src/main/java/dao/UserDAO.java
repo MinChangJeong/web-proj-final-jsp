@@ -136,6 +136,28 @@ public class UserDAO {
 		}
 	}
 	
+	public void updateUser(Connection conn, User user, int user_id) 
+	         throws SQLException {
+	      PreparedStatement pstmt=null; 
+	      try {
+	         pstmt = conn.prepareStatement
+	         ("update user set username=?, email=?, password=?, phoneNumber=?, shoesSize=?, address=? where user_id=?");
+	         pstmt.setString(1, user.getUsername());
+	         pstmt.setString(2, user.getEmail());
+	         pstmt.setString(3, user.getPassword());
+	         pstmt.setString(4, user.getPhoneNumber());
+	         pstmt.setInt(5, user.getShoesSize());
+	         pstmt.setString(6, user.getAddress());
+	         pstmt.setInt(7, user_id);
+	         
+	         pstmt.executeUpdate(); 
+	      } catch (SQLException e){
+	         e.printStackTrace();
+	      } finally {
+	         JdbcUtil.close(conn);
+	         JdbcUtil.close(pstmt);
+	      }
+	   }
 	
 	
 }

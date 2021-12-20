@@ -75,6 +75,7 @@
 	        <ul>
 				<li><a href="../user/userPurchaseInfo.jsp">구매내역</a></li>
 				<li><a href="../user/userInterestInfo.jsp">관심상품</a></li>
+				<li><a href="../user/userUpdate.jsp">회원정보</a></li>
 	       </ul>
 	    </div>
 	    <div class="line"></div>
@@ -179,6 +180,5 @@
     </div>
     <img class="bottom-info-img" src="../images/banner3.png" alt="img" />
 </div>
-
 </body>
 </html>
